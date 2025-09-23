@@ -1,0 +1,196 @@
+.homepage {
+    min-height: 100vh;
+    background: var(--background);
+
+    // ============================
+    // HEADER SECTION
+    // ============================
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+
+        &__brand {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text);
+        }
+
+        &__nav {
+            &-link {
+                color: var(--text);
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 400;
+
+                &:hover {
+                    color: var(--primary);
+                    transition: color 0.3s ease;
+                }
+            }
+        }
+    }
+
+    // ============================
+    // MAIN CONTENT
+    // ============================
+    .main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        max-width: none;
+        margin: 0;
+    }
+
+    // ============================
+    // HERO SECTION
+    // ============================
+    .hero {
+        text-align: center;
+        margin-bottom: 3rem;
+        width: 100%;
+
+        &__title {
+            font-size: 5rem;
+            font-weight: 400;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0;
+            line-height: 1;
+
+            @media (max-width: 768px) {
+                font-size: 3rem;
+            }
+
+            @media (max-width: 576px) {
+                font-size: 2rem;
+            }
+        }
+
+        &__subtitle {
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+            font-weight: 400;
+            line-height: 1.2;
+
+            @media (max-width: 768px) {
+                font-size: 1.5rem;
+            }
+
+            @media (max-width: 576px) {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    // ============================
+    // SEARCH SECTION
+    // ============================
+    .search {
+        margin: 2rem 0 3rem 0;
+        width: 100%;
+        max-width: 500px;
+
+        &__container {
+            position: relative;
+            width: 100%;
+        }
+
+        &__icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            z-index: 1;
+        }
+
+        &__input {
+            width: 100%;
+            padding: 1rem 1.2rem 1rem 3rem;
+            background: transparent;
+            border: 1px solid var(--text-secondary);
+            border-radius: 6px;
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 400;
+
+            &:focus {
+                outline: none;
+                border-color: var(--primary);
+            }
+
+            &::placeholder {
+                color: var(--text-secondary);
+            }
+        }
+    }
+
+    // ============================
+    // STATS SECTION
+    // ============================
+    .stats {
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 2rem;
+
+        &__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+
+            @media (max-width: 768px) {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        &__card {
+            background: var(--background-secondary);
+            border-radius: 8px;
+            padding: 0;
+            min-height: 180px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid;
+
+            // Win card styling - green border
+            &--win {
+                border-color: var(--secondary);
+            }
+
+            // Loss card styling - red border
+            &--loss {
+                border-color: #f56565;
+            }
+
+            // Fumble card styling - purple border
+            &--fumble {
+                border-color: #9f7aea;
+            }
+
+            &-title {
+                font-size: 1rem;
+                color: var(--text);
+                margin: 0;
+                padding: 1rem 1rem 0 1rem;
+                font-weight: 400;
+                text-align: left;
+            }
+
+            &-content {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--text-secondary);
+                min-height: 120px;
+                padding: 1rem;
+            }
+        }
+    }
+}

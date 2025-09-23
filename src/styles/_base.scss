@@ -1,0 +1,63 @@
+@use "variables";
+@use "sass:color";
+
+// ============================
+// RESET DEFAULT STYLES
+// ============================
+* {
+    transition: background-color 0.5s ease-in-out;
+}
+
+// ============================
+// GLOBAL STYLES
+// ============================
+html {
+    font-size: variables.$font-size-base;
+
+    @media (max-width: variables.$breakpoint-xxl) {
+        font-size: variables.$font-size-md;
+    }
+
+    @media (max-width: variables.$breakpoint-xl) {
+        font-size: variables.$font-size-md;
+    }
+
+    @media (max-width: variables.$breakpoint-md2) {
+        font-size: variables.$font-size-sm;
+    }
+
+    @media (max-width: variables.$breakpoint-md) {
+        font-size: variables.$font-size-sm;
+    }
+
+    @media (max-width: variables.$breakpoint-sm) {
+        font-size: variables.$font-size-sm;
+    }
+
+    @media (max-width: variables.$breakpoint-xs) {
+        font-size: variables.$font-size-sm;
+    }
+}
+
+html,
+body {
+    font-family: variables.$font-primary !important;
+    line-height: variables.$line-height !important;
+    text-rendering: variables.$text-rendering;
+    -webkit-font-smoothing: variables.$font-smoothing;
+    -moz-osx-font-smoothing: variables.$font-smoothing;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+}
+
+// ============================
+// LINK STYLES
+// ============================
+a {
+    font-weight: variables.$font-weight-medium;
+    text-decoration: none;
+    cursor: pointer;
+}
