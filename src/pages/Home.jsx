@@ -1,51 +1,40 @@
-import { useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/NavBar";
 
 const Home = () => {
-    const themes = ["light", "dark", "red"];
-    let current = 0;
+    const [searchValue, setSearchValue] = useState("");
+    const navigate = useNavigate();
 
-    function toggleTheme() {
-        current = (current + 1) % themes.length;
-        document.documentElement.setAttribute("data-theme", themes[current]);
-        console.log("Theme set to:", themes[current]);
-    }
-
-    useEffect(() => {
-        // Set initial theme
-        document.documentElement.setAttribute("data-theme", themes[current]);
-
-        const btn = document.getElementById("theme-toggle");
-        btn?.addEventListener("click", toggleTheme);
-
-        return () => btn?.removeEventListener("click", toggleTheme);
-    }, []);
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchValue.trim()) {
+            navigate(`/result?wallet=${encodeURIComponent(searchValue)}`);
+        }
+    };
 
     return (
         <div className="homepage">
-            <header className="header">
-                <div className="header__brand">trackerbot.fun</div>
-                <nav className="header__nav">
-                    <a href="#" className="header__nav-link">Leaderboard</a>
-                    <button id="theme-toggle">Toggle Theme</button>
-                </nav>
-            </header>
+            <Navbar />
 
             <main className="main">
                 <div className="hero">
-                    <h1 className="hero__title">trackerbot.fun</h1>
-                    <p className="hero__subtitle">Paste a wallet.</p>
-                    <p className="hero__subtitle">Reveal the degen story.</p>
+                    <div className="hero__title">trackerbot.fun</div>
+                    <div className="hero__subtitle">Paste a wallet.</div>
+                    <div className="hero__subtitle">Reveal the degen story.</div>
 
-                    <div className="search">
+                    <form onSubmit={handleSearch} className="search">
                         <div className="search__container">
-                            <div className="search__icon">🔍</div>
+                            <i class="search__icon fa-solid fa-xl fa-magnifying-glass"></i>
                             <input
                                 type="text"
                                 className="search__input"
                                 placeholder=""
+                                value={searchValue}
+                                onChange={(e) => setSearchValue(e.target.value)}
                             />
                         </div>
-                    </div>
+                    </form>
                 </div>
 
                 <div className="stats">
@@ -53,21 +42,21 @@ const Home = () => {
                         <div className="stats__card stats__card--win">
                             <h3 className="stats__card-title">Biggest Win in 24h</h3>
                             <div className="stats__card-content">
-                                {/* Content would go here */}
+                                {/* Empty for now */}
                             </div>
                         </div>
 
                         <div className="stats__card stats__card--loss">
                             <h3 className="stats__card-title">Biggest Loss in 24h</h3>
                             <div className="stats__card-content">
-                                {/* Content would go here */}
+                                {/* Empty for now */}
                             </div>
                         </div>
 
                         <div className="stats__card stats__card--fumble">
                             <h3 className="stats__card-title">Biggest Fumble in 24h</h3>
                             <div className="stats__card-content">
-                                {/* Content would go here */}
+                                {/* Empty for now */}
                             </div>
                         </div>
                     </div>

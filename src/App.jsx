@@ -5,12 +5,12 @@ import Home from './pages/Home';
 function App() {
   return (
     <BrowserRouter>
-      <div className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/result" element={<Result />} />
-        </Routes>
-      </div>
+      {/* <div className="main-content"> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/result" element={<Result />} />
+      </Routes>
+      {/* </div> */}
     </BrowserRouter>
   );
 }

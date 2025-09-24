@@ -1,4 +1,8 @@
+@use "sass:map";
+// Add these imports at the top of your _variables.scss
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 
 // ============================
 // Base SCSS tokens
@@ -13,10 +17,10 @@ $light: (
 );
 
 $dark: (
-    primary: #a8f5c0,
+    primary: #bee1c9,
     secondary: #68d391,
-    background: #0f1419,
-    background-secondary: #1e2328,
+    background: #05090a,
+    background-secondary: #0c1013,
     text: #ffffff,
     text-secondary: #8b949e
 );
@@ -26,19 +30,19 @@ $dark: (
 // ============================
 
 @mixin theme($map) {
-    --primary: #{map-get($map, primary)};
-    --secondary: #{map-get($map, secondary)};
-    --background: #{map-get($map, background)};
-    --background-secondary: #{map-get($map, background-secondary)};
-    --text: #{map-get($map, text)};
-    --text-secondary: #{map-get($map, text-secondary)};
+    --primary: #{map.get($map, primary)};
+    --secondary: #{map.get($map, secondary)};
+    --background: #{map.get($map, background)};
+    --background-secondary: #{map.get($map, background-secondary)};
+    --text: #{map.get($map, text)};
+    --text-secondary: #{map.get($map, text-secondary)};
 }
 
 // ============================
 // Theme definitions
 // ============================
 :root {
-    @include theme($dark); // default
+    @include theme($dark);
 }
 
 [data-theme="light"] {
@@ -56,8 +60,12 @@ $font-size-md: 14px;
 $font-size-sm: 12px;
 $font-size-xs: 10px;
 
-// $font-primary: "Poppins", system-ui, sans-serif;
-$font-primary: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+// Update your font variables
+$font-primary: "Poppins", system-ui, sans-serif;
+$font-monospace: "Monaco", "Menlo", "Ubuntu Mono", "Courier New", monospace;
+$font-pixel: "Press Start 2P", "Monaco", "Menlo", monospace;
+$font-pixel2: "VT323", monospace;
+
 $font-weight-regular: 400;
 $font-weight-medium: 500;
 $font-weight-bold: 600;

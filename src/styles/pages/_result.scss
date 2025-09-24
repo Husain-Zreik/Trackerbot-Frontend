@@ -1,1 +1,159 @@
 @use "../variables";
+
+.result {
+    min-height: 100vh;
+    background: var(--background);
+
+    // ============================
+    // MAIN CONTENT
+    // ============================
+    .main {
+        padding: 3rem 2rem 2rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    // ============================
+    // TOP STATS ROW
+    // ============================
+    &__stats {
+        margin-bottom: 3rem;
+
+        &-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+
+            @media (max-width: 768px) {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    }
+
+    &__stat-card {
+        background: var(--background-secondary);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__stat-title {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        margin: 0 0 1rem 0;
+        font-weight: 400;
+    }
+
+    &__stat-value {
+        font-size: 1.5rem;
+        color: var(--text);
+        font-weight: 600;
+        margin: 0;
+    }
+
+    // ============================
+    // BOTTOM ANALYSIS ROW
+    // ============================
+    &__analysis {
+        &-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+
+            @media (max-width: 968px) {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        &-card {
+            background: var(--background-secondary);
+            border-radius: 12px;
+            padding: 0;
+            min-height: 400px;
+            border: 2px solid;
+
+            // Win card styling - green border
+            &--wins {
+                border-color: #22c55e;
+            }
+
+            // Loss card styling - red border
+            &--losses {
+                border-color: #ef4444;
+            }
+
+            // Fumble card styling - purple border
+            &--fumbles {
+                border-color: #8b5cf6;
+            }
+        }
+
+        &-title {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin: 0;
+            padding: 1.5rem 1.5rem 1rem 1.5rem;
+            font-weight: 500;
+        }
+
+        &-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1.5rem 1rem 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 400;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        &-content {
+            padding: 1rem 1.5rem 1.5rem 1.5rem;
+        }
+
+        &-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+
+    // ============================
+    // DATA ELEMENTS
+    // ============================
+    .result__token {
+        color: var(--text);
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .result__profit {
+        color: #22c55e;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .result__loss {
+        color: #ef4444;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .result__value {
+        color: var(--text);
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+}
