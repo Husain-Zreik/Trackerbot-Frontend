@@ -18,7 +18,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0rem 2rem;
+        padding: 0.5rem 2rem;
         max-width: 1400px;
         margin: 0 auto;
 
@@ -65,6 +65,101 @@
             @media (max-width: variables.$breakpoint-sm) {
                 font-size: 0.9rem;
             }
+        }
+    }
+
+    &__connect-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--primary) 40%, #00ff00) 0%,
+            color-mix(in srgb, var(--primary) 60%, #008000) 50%,
+            color-mix(in srgb, var(--primary) 80%, #32cd32) 100%
+        );
+        color: var(--background);
+        border: none;
+        border-radius: 12px;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 15px color-mix(in srgb, var(--primary) 60%, #00ff00);
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                color-mix(in srgb, var(--primary) 50%, #00ff88) 0%,
+                color-mix(in srgb, var(--primary) 70%, #00cc44) 50%,
+                color-mix(in srgb, var(--primary) 90%, #228b22) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px color-mix(in srgb, var(--primary) 70%, #00ff44);
+            filter: brightness(1.15) saturate(1.2);
+
+            &::before {
+                left: 100%;
+            }
+
+            &::after {
+                opacity: 1;
+            }
+        }
+
+        &:active {
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            padding: 0.6rem 1rem;
+            font-size: 0.85rem;
+            gap: 0.4rem;
+        }
+    }
+
+    &__connect-icon {
+        width: 1rem;
+        height: 1rem;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+        transition: all 0.3s ease;
+
+        .navbar__connect-btn:hover & {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            width: 14px;
+            height: 14px;
         }
     }
 }
