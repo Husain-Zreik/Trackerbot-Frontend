@@ -1,14 +1,23 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../components/NavBar';
 import ResultStatCard from '../components/ResultStatCard';
 import AnalysisCard from '../components/AnalysisCard';
 
 const Result = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const urlParams = new URLSearchParams(location.search);
     const wallet = urlParams.get('wallet');
 
-    // Dummy data for the result page
+    const handleBackToHome = () => {
+        navigate('/');
+    };
+
+    const handleNewSearch = () => {
+        navigate('/');
+    };
+
+    // Extended dummy data for scrolling demonstration
     const resultData = {
         stats: [
             { label: "Current Balance", value: "$45,234" },
@@ -17,30 +26,74 @@ const Result = () => {
         ],
         biggestWins: [
             { token: "$BONK", profit: "+$14,500" },
-            { token: "", profit: "+$12,800" },
-            { token: "", profit: "+$12,200" },
-            { token: "", profit: "+$10,400" },
-            { token: "", profit: "+$8,200" }
+            { token: "$PEPE", profit: "+$12,800" },
+            { token: "$WIF", profit: "+$12,200" },
+            { token: "$SHIB", profit: "+$10,400" },
+            { token: "$DOGE", profit: "+$8,200" },
+            { token: "$FLOKI", profit: "+$7,800" },
+            { token: "$MEME", profit: "+$6,900" },
+            { token: "$WOJAK", profit: "+$6,500" },
+            { token: "$TURBO", profit: "+$5,800" },
+            { token: "$BOB", profit: "+$5,200" },
+            { token: "$LADYS", profit: "+$4,800" },
+            { token: "$PEPE2", profit: "+$4,500" },
+            { token: "$SPONGE", profit: "+$4,200" },
+            { token: "$SIMPSON", profit: "+$3,900" },
+            { token: "$JEFF", profit: "+$3,600" },
+            { token: "$PEPEC", profit: "+$3,300" },
+            { token: "$BOBO", profit: "+$3,000" },
+            { token: "$WAGMI", profit: "+$2,700" },
+            { token: "$PSYOP", profit: "+$2,400" },
+            { token: "$REFUND", profit: "+$2,100" }
         ],
         biggestLosses: [
-            { token: "", loss: "-$8,400" },
-            { token: "", loss: "-$6,200" },
-            { token: "", loss: "-$2,600" },
-            { token: "", loss: "-$2,400" },
-            { token: "", loss: "-$1,200" }
+            { token: "$LUNA", loss: "-$18,400" },
+            { token: "$FTT", loss: "-$16,200" },
+            { token: "$CELSIUS", loss: "-$12,600" },
+            { token: "$SQUID", loss: "-$10,400" },
+            { token: "$TITAN", loss: "-$8,200" },
+            { token: "$IRON", loss: "-$7,100" },
+            { token: "$BUNNY", loss: "-$6,500" },
+            { token: "$MARK", loss: "-$5,900" },
+            { token: "$BASED", loss: "-$5,300" },
+            { token: "$HOTDOG", loss: "-$4,700" },
+            { token: "$PICKLE", loss: "-$4,200" },
+            { token: "$KIMCHI", loss: "-$3,800" },
+            { token: "$SUSHI", loss: "-$3,400" },
+            { token: "$CAKE", loss: "-$3,000" },
+            { token: "$BURGER", loss: "-$2,600" },
+            { token: "$PIZZA", loss: "-$2,300" },
+            { token: "$TACO", loss: "-$2,000" },
+            { token: "$DONUT", loss: "-$1,700" },
+            { token: "$CREAM", loss: "-$1,400" },
+            { token: "$PASTA", loss: "-$1,100" }
         ],
         biggestFumbles: [
-            { token: "", value: "$868,400" },
-            { token: "", value: "$649,200" },
-            { token: "", value: "$267,600" },
-            { token: "", value: "$250,400" },
-            { token: "", value: "$177,200" }
+            { token: "$BTC", value: "$868,400" },
+            { token: "$ETH", value: "$649,200" },
+            { token: "$SOL", value: "$267,600" },
+            { token: "$AVAX", value: "$250,400" },
+            { token: "$MATIC", value: "$177,200" },
+            { token: "$ADA", value: "$156,800" },
+            { token: "$DOT", value: "$134,500" },
+            { token: "$LINK", value: "$112,300" },
+            { token: "$UNI", value: "$98,700" },
+            { token: "$ATOM", value: "$87,400" },
+            { token: "$FTM", value: "$76,200" },
+            { token: "$NEAR", value: "$65,800" },
+            { token: "$ALGO", value: "$54,300" },
+            { token: "$VET", value: "$43,200" },
+            { token: "$SAND", value: "$32,100" },
+            { token: "$MANA", value: "$28,900" },
+            { token: "$AXS", value: "$24,600" },
+            { token: "$GALA", value: "$21,300" },
+            { token: "$ENJ", value: "$18,700" },
+            { token: "$CHZ", value: "$15,400" }
         ]
     };
 
     return (
         <div className="result">
-            <Navbar />
 
             <main className="main">
                 {/* Top Stats Row */}
@@ -64,6 +117,7 @@ const Result = () => {
                             title="Biggest Wins"
                             headers={{ left: "Token", right: "Profit" }}
                             data={resultData.biggestWins}
+                            walletAddress={wallet}
                         />
 
                         <AnalysisCard
@@ -71,6 +125,7 @@ const Result = () => {
                             title="Biggest Losses"
                             headers={{ left: "Token", right: "Loss" }}
                             data={resultData.biggestLosses}
+                            walletAddress={wallet}
                         />
 
                         <AnalysisCard
@@ -78,8 +133,30 @@ const Result = () => {
                             title="Biggest Fumbles"
                             headers={{ left: "Token", right: "Value" }}
                             data={resultData.biggestFumbles}
+                            walletAddress={wallet}
                         />
                     </div>
+                </div>
+
+                {/* Navigation Controls */}
+                <div className="result__controls">
+                    <button
+                        className="result__back-btn"
+                        onClick={handleBackToHome}
+                        title="Back to home"
+                    >
+                        <i className="fa-solid fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+
+                    <button
+                        className="result__new-search-btn"
+                        onClick={handleNewSearch}
+                        title="New search"
+                    >
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                        <span>New Search</span>
+                    </button>
                 </div>
             </main>
         </div>

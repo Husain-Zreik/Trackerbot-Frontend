@@ -16,8 +16,6 @@ const Home = () => {
 
     return (
         <div className="homepage">
-            <Navbar />
-
             <main className="main">
                 <div className="hero">
                     <div className="hero__title">trackerbot.fun</div>
