@@ -11,7 +11,6 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
-        z-index: 100;
     }
 
     &__content {
@@ -72,12 +71,6 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        background: linear-gradient(
-            135deg,
-            color-mix(in srgb, var(--primary) 40%, #00ff00) 0%,
-            color-mix(in srgb, var(--primary) 60%, #008000) 50%,
-            color-mix(in srgb, var(--primary) 80%, #32cd32) 100%
-        );
         color: var(--background);
         border: none;
         border-radius: 12px;
@@ -91,7 +84,6 @@
         letter-spacing: 0.5px;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 4px 15px color-mix(in srgb, var(--primary) 60%, #00ff00);
 
         &::before {
             content: "";
@@ -104,35 +96,12 @@
             transition: left 0.5s;
         }
 
-        &::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                135deg,
-                color-mix(in srgb, var(--primary) 50%, #00ff88) 0%,
-                color-mix(in srgb, var(--primary) 70%, #00cc44) 50%,
-                color-mix(in srgb, var(--primary) 90%, #228b22) 100%
-            );
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
         &:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px color-mix(in srgb, var(--primary) 70%, #00ff44);
             filter: brightness(1.15) saturate(1.2);
 
             &::before {
                 left: 100%;
-            }
-
-            &::after {
-                opacity: 1;
             }
         }
 
@@ -144,6 +113,56 @@
             padding: 0.6rem 1rem;
             font-size: 0.85rem;
             gap: 0.4rem;
+        }
+
+        &--x {
+            background: linear-gradient(
+                135deg,
+                color-mix(in srgb, var(--primary) 40%, #00ff00) 0%,
+                color-mix(in srgb, var(--primary) 60%, #008000) 50%,
+                color-mix(in srgb, var(--primary) 80%, #32cd32) 100%
+            );
+            box-shadow: 0 4px 15px color-mix(in srgb, var(--primary) 60%, #00ff00);
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(
+                    135deg,
+                    color-mix(in srgb, var(--primary) 50%, #00ff88) 0%,
+                    color-mix(in srgb, var(--primary) 70%, #00cc44) 50%,
+                    color-mix(in srgb, var(--primary) 90%, #228b22) 100%
+                );
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                z-index: -1;
+            }
+
+            &:hover {
+                box-shadow: 0 12px 35px color-mix(in srgb, var(--primary) 70%, #00ff44);
+
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+
+        &--wallet {
+            background: linear-gradient(
+                135deg,
+                color-mix(in srgb, var(--primary) 40%, #ffdd00) 0%,
+                color-mix(in srgb, var(--primary) 60%, #ffaa00) 50%,
+                color-mix(in srgb, var(--primary) 80%, #ff8800) 100%
+            );
+            box-shadow: 0 4px 15px color-mix(in srgb, var(--primary) 60%, #ffaa00);
+
+            &:hover {
+                box-shadow: 0 12px 35px color-mix(in srgb, var(--primary) 70%, #ffbb33);
+            }
         }
     }
 

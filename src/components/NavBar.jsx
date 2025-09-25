@@ -1,7 +1,11 @@
 const Navbar = () => {
-
     const handleConnectToX = () => {
         window.open('https://twitter.com/intent/follow?screen_name=trackerbot_fun', '_blank');
+    };
+
+    const handleConnectWallet = () => {
+        console.log("Wallet connect triggered");
+        // here you’d plug in WalletConnect / MetaMask integration
     };
 
     return (
@@ -12,8 +16,16 @@ const Navbar = () => {
                     <div className="navbar__brand">trackerbot.fun</div>
                     <div className="navbar__nav">
                         <button
+                            onClick={handleConnectWallet}
+                            className="navbar__connect-btn navbar__connect-btn--wallet"
+                        >
+                            <i class="fa-solid fa-wallet navbar__connect-icon"></i>
+                            Wallet
+                        </button>
+
+                        <button
                             onClick={handleConnectToX}
-                            className="navbar__connect-btn"
+                            className="navbar__connect-btn navbar__connect-btn--x"
                         >
                             <svg className="navbar__connect-icon" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/NavBar";
+import StatsCard from "../components/StatCard";
 
 const Home = () => {
     const [searchValue, setSearchValue] = useState("");
@@ -25,7 +26,7 @@ const Home = () => {
 
                     <form onSubmit={handleSearch} className="search">
                         <div className="search__container">
-                            <i class="search__icon fa-solid fa-xl fa-magnifying-glass"></i>
+                            <i className="search__icon fa-solid fa-xl fa-magnifying-glass"></i>
                             <input
                                 type="text"
                                 className="search__input"
@@ -38,27 +39,18 @@ const Home = () => {
                 </div>
 
                 <div className="stats">
-                    <div className="stats__grid">
-                        <div className="stats__card stats__card--win">
-                            <h3 className="stats__card-title">Biggest Win in 24h</h3>
-                            <div className="stats__card-content">
-                                {/* Empty for now */}
-                            </div>
-                        </div>
+                    <div className="stats__flex">
+                        <StatsCard type="win" title="Biggest Win in 24h">
+                            {/* Empty for now - can add data later */}
+                        </StatsCard>
 
-                        <div className="stats__card stats__card--loss">
-                            <h3 className="stats__card-title">Biggest Loss in 24h</h3>
-                            <div className="stats__card-content">
-                                {/* Empty for now */}
-                            </div>
-                        </div>
+                        <StatsCard type="loss" title="Biggest Loss in 24h">
+                            {/* Empty for now - can add data later */}
+                        </StatsCard>
 
-                        <div className="stats__card stats__card--fumble">
-                            <h3 className="stats__card-title">Biggest Fumble in 24h</h3>
-                            <div className="stats__card-content">
-                                {/* Empty for now */}
-                            </div>
-                        </div>
+                        <StatsCard type="fumble" title="Biggest Fumble in 24h">
+                            {/* Empty for now - can add data later */}
+                        </StatsCard>
                     </div>
                 </div>
             </main>

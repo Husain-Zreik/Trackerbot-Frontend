@@ -1,5 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import Navbar from '../components/NavBar';
+import ResultStatCard from '../components/ResultStatCard';
+import AnalysisCard from '../components/AnalysisCard';
 
 const Result = () => {
     const location = useLocation();
@@ -45,10 +47,11 @@ const Result = () => {
                 <div className="result__stats">
                     <div className="result__stats-grid">
                         {resultData.stats.map((stat, index) => (
-                            <div key={index} className="result__stat-card">
-                                <h3 className="result__stat-title">{stat.label}</h3>
-                                <div className="result__stat-value">{stat.value}</div>
-                            </div>
+                            <ResultStatCard
+                                key={index}
+                                label={stat.label}
+                                value={stat.value}
+                            />
                         ))}
                     </div>
                 </div>
@@ -56,56 +59,26 @@ const Result = () => {
                 {/* Bottom Analysis Row */}
                 <div className="result__analysis">
                     <div className="result__analysis-grid">
-                        {/* Biggest Wins */}
-                        <div className="result__analysis-card result__analysis-card--wins">
-                            <h3 className="result__analysis-title">Biggest Wins</h3>
-                            <div className="result__analysis-header">
-                                <span>Token</span>
-                                <span>Profit</span>
-                            </div>
-                            <div className="result__analysis-content">
-                                {resultData.biggestWins.map((item, index) => (
-                                    <div key={index} className="result__analysis-row">
-                                        <span className="result__token">{item.token}</span>
-                                        <span className="result__profit">{item.profit}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        <AnalysisCard
+                            type="wins"
+                            title="Biggest Wins"
+                            headers={{ left: "Token", right: "Profit" }}
+                            data={resultData.biggestWins}
+                        />
 
-                        {/* Biggest Losses */}
-                        <div className="result__analysis-card result__analysis-card--losses">
-                            <h3 className="result__analysis-title">Biggest Losses</h3>
-                            <div className="result__analysis-header">
-                                <span>Token</span>
-                                <span>Loss</span>
-                            </div>
-                            <div className="result__analysis-content">
-                                {resultData.biggestLosses.map((item, index) => (
-                                    <div key={index} className="result__analysis-row">
-                                        <span className="result__token">{item.token}</span>
-                                        <span className="result__loss">{item.loss}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        <AnalysisCard
+                            type="losses"
+                            title="Biggest Losses"
+                            headers={{ left: "Token", right: "Loss" }}
+                            data={resultData.biggestLosses}
+                        />
 
-                        {/* Biggest Fumbles */}
-                        <div className="result__analysis-card result__analysis-card--fumbles">
-                            <h3 className="result__analysis-title">Biggest Fumbles</h3>
-                            <div className="result__analysis-header">
-                                <span>Token</span>
-                                <span>Value</span>
-                            </div>
-                            <div className="result__analysis-content">
-                                {resultData.biggestFumbles.map((item, index) => (
-                                    <div key={index} className="result__analysis-row">
-                                        <span className="result__token">{item.token}</span>
-                                        <span className="result__value">{item.value}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        <AnalysisCard
+                            type="fumbles"
+                            title="Biggest Fumbles"
+                            headers={{ left: "Token", right: "Value" }}
+                            data={resultData.biggestFumbles}
+                        />
                     </div>
                 </div>
             </main>

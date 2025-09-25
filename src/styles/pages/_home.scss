@@ -28,13 +28,13 @@
         width: 100%;
 
         &__title {
-            font-size: 7rem;
-            transform: scale(2);
+            font-size: 14rem;
             letter-spacing: -3px;
             font-weight: 400;
             font-family: variables.$font-pixel2;
             color: var(--primary);
             margin-top: 1rem;
+            line-height: 0.8;
 
             @media (max-width: 768px) {
                 font-size: 3rem;
@@ -108,23 +108,27 @@
     // ============================
     // STATS SECTION - CRYPTO STYLE
     // ============================
+
     .stats {
         width: 100%;
         max-width: 1200px;
         padding: 0 2rem;
 
-        &__grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+        &__flex {
+            display: flex;
             gap: 2.5rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
 
             @media (max-width: 768px) {
-                grid-template-columns: 1fr;
+                flex-direction: column;
                 gap: 2rem;
             }
         }
 
         &__card {
+            flex: 1;
+            min-width: 280px;
             background: linear-gradient(
                 135deg,
                 var(--background-secondary) 0%,
