@@ -106,7 +106,7 @@
     }
 
     // ============================
-    // STATS SECTION
+    // STATS SECTION - CRYPTO STYLE
     // ============================
     .stats {
         width: 100%;
@@ -116,43 +116,117 @@
         &__grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 2rem;
+            gap: 2.5rem;
 
             @media (max-width: 768px) {
                 grid-template-columns: 1fr;
-                gap: 1rem;
+                gap: 2rem;
             }
         }
 
         &__card {
-            background: var(--background-secondary);
-            border-radius: 12px;
+            background: linear-gradient(
+                135deg,
+                var(--background-secondary) 0%,
+                color-mix(in srgb, var(--background-secondary) 98%, #000000) 100%
+            );
+            border-radius: 16px;
             padding: 0;
-            min-height: 200px;
+            min-height: 220px;
             position: relative;
             overflow: hidden;
-            border: 2px solid;
+            border: 1px solid;
+            transition: all 0.3s ease;
 
-            // Win card styling - green border
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+                border-radius: 16px 16px 0 0;
+                z-index: 1;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+                pointer-events: none;
+            }
+
+            &:hover {
+                transform: translateY(-3px);
+                filter: brightness(1.05);
+            }
+
+            // Win card styling - green glow
             &--win {
-                border-color: #22c55e;
+                border-color: #00ff88;
+                box-shadow:
+                    0 4px 20px rgba(0, 255, 136, 0.15),
+                    inset 0 1px 0 rgba(0, 255, 136, 0.1);
+
+                &::before {
+                    background: linear-gradient(90deg, #00ff88, #22c55e);
+                }
+
+                &:hover {
+                    box-shadow:
+                        0 8px 40px rgba(0, 255, 136, 0.25),
+                        0 0 30px rgba(0, 255, 136, 0.15),
+                        inset 0 1px 0 rgba(0, 255, 136, 0.15);
+                }
             }
 
-            // Loss card styling - red border
+            // Loss card styling - red glow
             &--loss {
-                border-color: #ef4444;
+                border-color: #ff4757;
+                box-shadow:
+                    0 4px 20px rgba(255, 71, 87, 0.15),
+                    inset 0 1px 0 rgba(255, 71, 87, 0.1);
+
+                &::before {
+                    background: linear-gradient(90deg, #ff4757, #ef4444);
+                }
+
+                &:hover {
+                    box-shadow:
+                        0 8px 40px rgba(255, 71, 87, 0.25),
+                        0 0 30px rgba(255, 71, 87, 0.15),
+                        inset 0 1px 0 rgba(255, 71, 87, 0.15);
+                }
             }
 
-            // Fumble card styling - purple border
+            // Fumble card styling - purple glow
             &--fumble {
-                border-color: #8b5cf6;
+                border-color: #a55eea;
+                box-shadow:
+                    0 4px 20px rgba(165, 94, 234, 0.15),
+                    inset 0 1px 0 rgba(165, 94, 234, 0.1);
+
+                &::before {
+                    background: linear-gradient(90deg, #a55eea, #8b5cf6);
+                }
+
+                &:hover {
+                    box-shadow:
+                        0 8px 40px rgba(165, 94, 234, 0.25),
+                        0 0 30px rgba(165, 94, 234, 0.15),
+                        inset 0 1px 0 rgba(165, 94, 234, 0.15);
+                }
             }
 
             &-title {
                 font-size: 1.2rem;
                 color: var(--text);
                 margin: 0;
-                padding: 1.5rem 1.5rem 0 1.5rem;
+                padding: 2rem 2rem 1rem 2rem;
                 font-weight: 600;
                 text-align: center;
                 letter-spacing: 0.5px;
@@ -166,8 +240,11 @@
                 align-items: center;
                 justify-content: center;
                 color: var(--text-secondary);
-                min-height: 140px;
-                padding: 1.5rem;
+                min-height: 120px;
+                padding: 1.5rem 2rem 2rem 2rem;
+                font-size: 1rem;
+                font-style: italic;
+                text-align: center;
             }
         }
     }
