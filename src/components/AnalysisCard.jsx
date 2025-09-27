@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
+import ShareModal from './ShareModal';
 
 const AnalysisCard = ({ type, title, headers, data, walletAddress }) => {
     const [showScrollHint, setShowScrollHint] = useState(false);
+    const [modalData, setModalData] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const contentRef = useRef(null);
 
     useEffect(() => {
@@ -22,94 +25,79 @@ const AnalysisCard = ({ type, title, headers, data, walletAddress }) => {
         }
     };
 
-    const renderDataValue = (item) => {
-        switch (type) {
-            case 'wins':
-                return <span className="result__profit">{item.profit}</span>;
-            case 'losses':
-                return <span className="result__loss">{item.loss}</span>;
-            case 'fumbles':
-                return <span className="result__value">{item.value}</span>;
-            default:
-                return null;
-        }
+    const handleShareClick = (item, index) => {
+        setModalData({ ...item, rank: index + 1 });
+        setIsModalOpen(true);
     };
 
-    const handleShareToX = () => {
-        const walletShort = walletAddress ?
-            `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Wallet';
+    const renderDataValue = (item, index) => {
+        return (
+            <div className="result__value-container">
+                {type === 'wins' && <span className="result__profit">{item.profit}</span>}
+                {type === 'losses' && <span className="result__loss">{item.loss}</span>}
+                {type === 'fumbles' && <span className="result__value">{item.value}</span>}
 
-        let shareText = '';
-        const top5 = data.slice(0, 5);
-
-        switch (type) {
-            case 'wins':
-                shareText = `🏆 ${title} for ${walletShort}\n\n`;
-                top5.forEach((item, i) => {
-                    shareText += `${i + 1}. ${item.token}: ${item.profit}\n`;
-                });
-                shareText += `\n💚 Check your wins at trackerbot.fun`;
-                break;
-
-            case 'losses':
-                shareText = `📉 ${title} for ${walletShort}\n\n`;
-                top5.forEach((item, i) => {
-                    shareText += `${i + 1}. ${item.token}: ${item.loss}\n`;
-                });
-                shareText += `\n💔 Check your losses at trackerbot.fun`;
-                break;
-
-            case 'fumbles':
-                shareText = `😭 ${title} for ${walletShort}\n\n`;
-                top5.forEach((item, i) => {
-                    shareText += `${i + 1}. ${item.token}: ${item.value}\n`;
-                });
-                shareText += `\n🤦 What could have been... trackerbot.fun`;
-                break;
-        }
-
-        const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
-        window.open(shareUrl, '_blank');
-    };
-
-    return (
-        <div className={`result__analysis-card result__analysis-card--${type}`}>
-            <div className="result__analysis-header-container">
-                <h3 className="result__analysis-title">{title}</h3>
                 <button
-                    className="result__card-share-btn"
-                    onClick={handleShareToX}
-                    title={`Share ${title} on X`}
+                    className="result__item-share-btn"
+                    onClick={() => handleShareClick(item, index)}
+                    title={`Share this ${type === 'wins' ? 'win' : type === 'losses' ? 'loss' : 'fumble'}`}
                 >
-                    <svg className="result__card-share-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    <svg className="result__item-share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
                     </svg>
                 </button>
             </div>
-            <div className="result__analysis-header">
-                <span>{headers.left}</span>
-                <span>{headers.right}</span>
-            </div>
-            <div
-                className="result__analysis-content"
-                ref={contentRef}
-                onScroll={handleScroll}
-            >
-                {data.map((item, index) => (
-                    <div key={index} className="result__analysis-row">
-                        <div className="result__analysis-rank">#{index + 1}</div>
-                        <span className="result__token">{item.token}</span>
-                        {renderDataValue(item)}
-                    </div>
-                ))}
-            </div>
-            {showScrollHint && (
-                <div className="result__scroll-hint">
-                    <i className="fa-solid fa-chevron-down"></i>
-                    <span>Scroll for more</span>
+        );
+    };
+
+    return (
+        <>
+            <div className={`result__analysis-card result__analysis-card--${type}`}>
+                <div className="result__analysis-header-container">
+                    <h3 className="result__analysis-title">{title}</h3>
                 </div>
-            )}
-        </div>
+                <div className="result__analysis-header">
+                    <span className="result__header-left">{headers.left}</span>
+                    <span className="result__header-right">{headers.right}</span>
+                </div>
+                <div
+                    className="result__analysis-content"
+                    ref={contentRef}
+                    onScroll={handleScroll}
+                >
+                    {data.map((item, index) => (
+                        <div key={index} className="result__analysis-row">
+                            <div className="result__row-left">
+                                <span className="result__analysis-rank">#{index + 1}</span>
+                                <span className="result__token">{item.token}</span>
+                            </div>
+                            {renderDataValue(item, index)}
+                        </div>
+                    ))}
+                </div>
+                {showScrollHint && (
+                    <div className="result__scroll-hint">
+                        <i className="fa-solid fa-chevron-down"></i>
+                        <span>Scroll for more</span>
+                    </div>
+                )}
+            </div>
+
+            <ShareModal
+                isOpen={isModalOpen}
+                onClose={() => {
+                    setIsModalOpen(false);
+                    setModalData(null);
+                }}
+                data={modalData}
+                type={type}
+                walletAddress={walletAddress}
+            />
+        </>
     );
 };
 

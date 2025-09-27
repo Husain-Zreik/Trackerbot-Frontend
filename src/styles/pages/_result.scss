@@ -20,7 +20,7 @@
         display: flex;
         justify-content: space-between;
         gap: 1rem;
-        margin-top: 3rem;
+        margin-top: 1rem;
 
         @media (max-width: 768px) {
             flex-direction: column;
@@ -381,9 +381,9 @@
 
         &-header-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 2rem 2rem 1.5rem 2rem;
+            padding: 2rem 2rem 2rem 2rem;
         }
 
         &-title {

@@ -1,0 +1,393 @@
+// src/styles/components/_share-modal.scss
+@use "../variables" as variables;
+
+.share-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+    padding: 1rem;
+
+    &__content {
+        background: linear-gradient(
+            135deg,
+            var(--background-secondary) 0%,
+            color-mix(in srgb, var(--background-secondary) 95%, var(--background)) 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 2rem;
+        max-width: 600px;
+        width: 100%;
+        position: relative;
+        animation: slideUp 0.3s ease;
+        box-shadow:
+            0 20px 60px rgba(0, 0, 0, 0.5),
+            0 0 100px rgba(var(--primary), 0.1);
+
+        @media (max-width: variables.$breakpoint-sm) {
+            padding: 1.5rem;
+            max-width: 95%;
+        }
+    }
+
+    &__close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: var(--text-secondary);
+
+        &:hover {
+            background: rgba(255, 71, 87, 0.2);
+            border-color: rgba(255, 71, 87, 0.5);
+            color: #ff4757;
+            transform: rotate(90deg);
+        }
+
+        i {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--text);
+        margin: 0 0 1.5rem 0;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        @media (max-width: variables.$breakpoint-sm) {
+            font-size: 1.4rem;
+        }
+    }
+
+    &__preview {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.01) 10px,
+                rgba(255, 255, 255, 0.01) 20px
+            );
+            pointer-events: none;
+        }
+    }
+
+    &__canvas {
+        max-width: 100%;
+        height: auto;
+    }
+
+    &__image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    &__loading {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        text-align: center;
+        padding: 2rem;
+        animation: pulse 1.5s infinite;
+    }
+
+    &__actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+
+        @media (max-width: variables.$breakpoint-sm) {
+            flex-direction: column;
+        }
+    }
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
+
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        i {
+            font-size: 1.1rem;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+
+            &::before {
+                left: 100%;
+            }
+        }
+
+        &:active {
+            transform: translateY(-1px);
+        }
+
+        &--x {
+            background: linear-gradient(135deg, #1da1f2 0%, #1a91da 100%);
+            color: white;
+
+            &:hover {
+                box-shadow:
+                    0 8px 25px rgba(29, 161, 242, 0.4),
+                    0 0 40px rgba(29, 161, 242, 0.2);
+            }
+        }
+
+        &--download {
+            background: linear-gradient(
+                135deg,
+                color-mix(in srgb, var(--primary) 80%, #00ff00) 0%,
+                color-mix(in srgb, var(--primary) 100%, #008000) 100%
+            );
+            color: var(--background);
+
+            &:hover {
+                box-shadow:
+                    0 8px 25px rgba(0, 255, 136, 0.4),
+                    0 0 40px rgba(0, 255, 136, 0.2);
+            }
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+}
+
+// Updated styles for individual share buttons in result.scss addition
+.result {
+    // Column alignment fixes
+    &__header-left {
+        flex: 1;
+        text-align: left;
+        padding-left: 3.5rem; // Align with content that has rank
+    }
+
+    &__header-right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 3.5rem; // Account for share button width
+    }
+
+    &__row-left {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__analysis-rank {
+        min-width: 2.5rem;
+        text-align: right;
+    }
+
+    &__token {
+        flex: 1;
+    }
+
+    &__value-container {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        justify-content: flex-end;
+    }
+
+    &__profit,
+    &__loss,
+    &__value {
+        min-width: 100px;
+        text-align: right;
+    }
+
+    &__item-share-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        padding: 0;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0.3;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(29, 161, 242, 0.4), transparent);
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        &:hover {
+            opacity: 1;
+            background: rgba(29, 161, 242, 0.15);
+            border-color: rgba(29, 161, 242, 0.4);
+            transform: scale(1.15) rotate(15deg);
+
+            &::before {
+                opacity: 1;
+                width: 150%;
+                height: 150%;
+            }
+
+            .result__item-share-icon {
+                stroke: #1da1f2;
+                filter: drop-shadow(0 0 4px rgba(29, 161, 242, 0.5));
+            }
+        }
+
+        &:active {
+            transform: scale(1.05) rotate(10deg);
+        }
+    }
+
+    &__item-share-icon {
+        width: 14px;
+        height: 14px;
+        color: var(--text-secondary);
+        transition: all 0.3s ease;
+        stroke-width: 2.5;
+    }
+
+    // Adjust row styling for better alignment
+    &__analysis-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.875rem 1rem;
+        gap: 1rem;
+
+        &:hover {
+            .result__item-share-btn {
+                opacity: 0.6;
+            }
+        }
+    }
+
+    // Ensure header has same padding structure
+    &__analysis-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 1rem 1.5rem 1rem;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+}
+
+// Animations
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
