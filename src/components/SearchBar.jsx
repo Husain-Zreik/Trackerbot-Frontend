@@ -149,7 +149,7 @@ const SearchBar = () => {
 
             {wallets.length > 0 && (
                 <div className="search-bar__actions">
-                    <button type="submit" className="search-bar__submit-btn">
+                    <button type="submit" className="btn btn--success btn--large btn--pulse">
                         <i className="fa-solid fa-chart-line"></i>
                         Analyze {wallets.length} wallet{wallets.length > 1 ? 's' : ''}
                     </button>

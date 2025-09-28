@@ -1,3 +1,5 @@
+// src/styles/_components.scss
+@forward "./components/buttons"; // Add this line
 @forward "./components/navbar";
 @forward "./components/modal";
 @forward "./components/searchbar";

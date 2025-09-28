@@ -1,4 +1,4 @@
-// src/styles/components/_share-modal.scss
+// src/styles/components/_modal.scss (partial - removed button styles)
 @use "../variables" as variables;
 
 .share-modal {
@@ -51,28 +51,7 @@
         position: absolute;
         top: 1.5rem;
         right: 1.5rem;
-        width: 44px;
-        height: 44px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        color: var(--text-secondary);
-
-        &:hover {
-            background: rgba(255, 71, 87, 0.2);
-            border-color: rgba(255, 71, 87, 0.5);
-            color: #ff4757;
-            transform: rotate(90deg) scale(1.1);
-        }
-
-        i {
-            font-size: 1.3rem;
-        }
+        // Button styles now handled by global classes
     }
 
     &__title {
@@ -174,92 +153,22 @@
 
         @media (max-width: variables.$breakpoint-sm) {
             flex-direction: column;
+
+            .btn {
+                width: 100%;
+            }
         }
-    }
 
-    &__btn {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 1rem 2rem;
-        border: none;
-        border-radius: 12px;
-        font-size: 1rem;
-        font-weight: 600;
-        font-family: inherit;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        position: relative;
-        overflow: hidden;
-
-        svg {
+        // Icon sizing for buttons in modal
+        .btn svg {
             width: 20px;
             height: 20px;
-        }
-
-        i {
-            font-size: 1.1rem;
-        }
-
-        &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        &:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-
-            &::before {
-                left: 100%;
-            }
-        }
-
-        &:active {
-            transform: translateY(-1px);
-        }
-
-        &--x {
-            background: linear-gradient(135deg, #1da1f2 0%, #1a91da 100%);
-            color: white;
-
-            &:hover {
-                box-shadow:
-                    0 8px 25px rgba(29, 161, 242, 0.4),
-                    0 0 40px rgba(29, 161, 242, 0.2);
-            }
-        }
-
-        &--download {
-            background: linear-gradient(
-                135deg,
-                color-mix(in srgb, var(--primary) 80%, #00ff00) 0%,
-                color-mix(in srgb, var(--primary) 100%, #008000) 100%
-            );
-            color: var(--background);
-
-            &:hover {
-                box-shadow:
-                    0 8px 25px rgba(0, 255, 136, 0.4),
-                    0 0 40px rgba(0, 255, 136, 0.2);
-            }
-        }
-
-        @media (max-width: variables.$breakpoint-sm) {
-            width: 100%;
-            justify-content: center;
         }
     }
 }
 
+// [REST OF THE STYLES FOR result__ items remain the same]
+// [ANIMATIONS remain the same]
 // Updated styles for individual share buttons in result.scss addition
 .result {
     // Column alignment fixes

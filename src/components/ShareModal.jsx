@@ -284,7 +284,7 @@ const ShareModal = ({ isOpen, onClose, data, type, walletAddress }) => {
     return (
         <div className="share-modal" onClick={onClose}>
             <div className="share-modal__content" onClick={(e) => e.stopPropagation()}>
-                <button className="share-modal__close" onClick={onClose}>
+                <button className="btn btn--icon-only btn--round btn--ghost share-modal__close" onClick={onClose}>
                     <i className="fa-solid fa-times"></i>
                 </button>
 
@@ -309,7 +309,7 @@ const ShareModal = ({ isOpen, onClose, data, type, walletAddress }) => {
 
                 <div className="share-modal__actions">
                     <button
-                        className="share-modal__btn share-modal__btn--x"
+                        className="btn btn--secondary btn--large"
                         onClick={handleShareToX}
                     >
                         <svg viewBox="0 0 24 24" fill="currentColor">
@@ -318,7 +318,7 @@ const ShareModal = ({ isOpen, onClose, data, type, walletAddress }) => {
                         Share on X
                     </button>
                     <button
-                        className="share-modal__btn share-modal__btn--download"
+                        className="btn btn--success btn--large"
                         onClick={handleDownloadImage}
                     >
                         <i className="fa-solid fa-download"></i>

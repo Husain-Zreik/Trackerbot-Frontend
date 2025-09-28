@@ -16,10 +16,6 @@ const Result = () => {
     const [currentWalletIndex, setCurrentWalletIndex] = useState(0);
     const currentWallet = walletList[currentWalletIndex] || walletList[0];
 
-    const handleBackToHome = () => {
-        navigate('/');
-    };
-
     const handleNewSearch = () => {
         navigate('/');
     };
@@ -131,7 +127,7 @@ const Result = () => {
                         </div>
                         <div className="result__wallet-nav">
                             <button
-                                className="result__wallet-nav-btn"
+                                className="btn btn--icon-only btn--round btn--small btn--ghost"
                                 disabled={currentWalletIndex === 0}
                                 onClick={() => setCurrentWalletIndex(currentWalletIndex - 1)}
                             >
@@ -141,7 +137,7 @@ const Result = () => {
                                 {currentWalletIndex + 1} / {walletList.length}
                             </span>
                             <button
-                                className="result__wallet-nav-btn"
+                                className="btn btn--icon-only btn--round btn--small btn--ghost"
                                 disabled={currentWalletIndex === walletList.length - 1}
                                 onClick={() => setCurrentWalletIndex(currentWalletIndex + 1)}
                             >
@@ -209,7 +205,7 @@ const Result = () => {
                 {/* Navigation Controls */}
                 <div className="result__controls">
                     <button
-                        className="result__new-search-btn"
+                        className="btn btn--secondary btn--large"
                         onClick={handleNewSearch}
                         title="New search"
                     >
