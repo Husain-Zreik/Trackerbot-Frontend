@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import Navbar from '../components/NavBar';
+import { useState } from 'react';
 import ResultStatCard from '../components/ResultStatCard';
 import AnalysisCard from '../components/AnalysisCard';
 
@@ -7,7 +7,14 @@ const Result = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const urlParams = new URLSearchParams(location.search);
-    const wallet = urlParams.get('wallet');
+
+    // Parse multiple wallets
+    const walletsParam = urlParams.get('wallets') || urlParams.get('wallet');
+    const walletList = walletsParam ? walletsParam.split(',').map(w => w.trim()) : [];
+
+    // State for current wallet being viewed
+    const [currentWalletIndex, setCurrentWalletIndex] = useState(0);
+    const currentWallet = walletList[currentWalletIndex] || walletList[0];
 
     const handleBackToHome = () => {
         navigate('/');
@@ -15,6 +22,10 @@ const Result = () => {
 
     const handleNewSearch = () => {
         navigate('/');
+    };
+
+    const handleWalletSwitch = (index) => {
+        setCurrentWalletIndex(index);
     };
 
     // Extended dummy data for scrolling demonstration
@@ -94,8 +105,65 @@ const Result = () => {
 
     return (
         <div className="result">
-
             <main className="main">
+                {/* Wallet Selector if multiple wallets */}
+                {walletList.length > 1 && (
+                    <div className="result__wallet-selector">
+                        <div className="result__wallet-tabs">
+                            {walletList.map((wallet, index) => (
+                                <button
+                                    key={index}
+                                    className={`result__wallet-tab ${index === currentWalletIndex ? 'result__wallet-tab--active' : ''}`}
+                                    onClick={() => handleWalletSwitch(index)}
+                                >
+                                    <i className="fa-solid fa-wallet"></i>
+                                    <span>
+                                        {wallet.length > 20
+                                            ? `${wallet.slice(0, 6)}...${wallet.slice(-4)}`
+                                            : wallet
+                                        }
+                                    </span>
+                                    {index === currentWalletIndex && (
+                                        <span className="result__wallet-tab-indicator"></span>
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+                        <div className="result__wallet-nav">
+                            <button
+                                className="result__wallet-nav-btn"
+                                disabled={currentWalletIndex === 0}
+                                onClick={() => setCurrentWalletIndex(currentWalletIndex - 1)}
+                            >
+                                <i className="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <span className="result__wallet-counter">
+                                {currentWalletIndex + 1} / {walletList.length}
+                            </span>
+                            <button
+                                className="result__wallet-nav-btn"
+                                disabled={currentWalletIndex === walletList.length - 1}
+                                onClick={() => setCurrentWalletIndex(currentWalletIndex + 1)}
+                            >
+                                <i className="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Current Wallet Display */}
+                {currentWallet && (
+                    <div className="result__current-wallet">
+                        <div className="result__current-wallet-badge">
+                            <i className="fa-solid fa-wallet"></i>
+                            <span>{currentWallet.length > 20
+                                ? `${currentWallet.slice(0, 6)}...${currentWallet.slice(-4)}`
+                                : currentWallet
+                            }</span>
+                        </div>
+                    </div>
+                )}
+
                 {/* Top Stats Row */}
                 <div className="result__stats">
                     <div className="result__stats-grid">
@@ -117,7 +185,7 @@ const Result = () => {
                             title="Biggest Wins"
                             headers={{ left: "Token", right: "Profit" }}
                             data={resultData.biggestWins}
-                            walletAddress={wallet}
+                            walletAddress={currentWallet}
                         />
 
                         <AnalysisCard
@@ -125,7 +193,7 @@ const Result = () => {
                             title="Biggest Losses"
                             headers={{ left: "Token", right: "Loss" }}
                             data={resultData.biggestLosses}
-                            walletAddress={wallet}
+                            walletAddress={currentWallet}
                         />
 
                         <AnalysisCard
@@ -133,22 +201,13 @@ const Result = () => {
                             title="Biggest Fumbles"
                             headers={{ left: "Token", right: "Value" }}
                             data={resultData.biggestFumbles}
-                            walletAddress={wallet}
+                            walletAddress={currentWallet}
                         />
                     </div>
                 </div>
 
                 {/* Navigation Controls */}
                 <div className="result__controls">
-                    <button
-                        className="result__back-btn"
-                        onClick={handleBackToHome}
-                        title="Back to home"
-                    >
-                        <i className="fa-solid fa-arrow-left"></i>
-                        <span>Back</span>
-                    </button>
-
                     <button
                         className="result__new-search-btn"
                         onClick={handleNewSearch}

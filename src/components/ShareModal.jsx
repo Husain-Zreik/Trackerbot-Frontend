@@ -20,126 +20,233 @@ const ShareModal = ({ isOpen, onClose, data, type, walletAddress }) => {
         canvas.width = 800;
         canvas.height = 500;
 
-        // Background gradient based on type
-        const gradient = ctx.createLinearGradient(0, 0, 800, 500);
+        // Dark background
+        ctx.fillStyle = '#0a0b0f';
+        ctx.fillRect(0, 0, 800, 500);
+
+        // Create gradient card background
+        const cardX = 100;
+        const cardY = 50;
+        const cardWidth = 600;
+        const cardHeight = 400;
+        const borderRadius = 30;
+
+        // Draw rounded rectangle path
+        const drawRoundedRect = (x, y, w, h, r) => {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+        };
+
+        // Save context for clipping
+        ctx.save();
+        drawRoundedRect(cardX, cardY, cardWidth, cardHeight, borderRadius);
+        ctx.clip();
+
+        // Create main gradient based on type
+        const cardGradient = ctx.createLinearGradient(cardX, cardY, cardX + cardWidth, cardY + cardHeight);
 
         if (type === 'wins') {
-            gradient.addColorStop(0, '#0a2f1f');
-            gradient.addColorStop(1, '#051a10');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, 800, 500);
-
-            // Add glow effect
-            ctx.shadowColor = '#00ff88';
-            ctx.shadowBlur = 100;
-            ctx.fillStyle = '#0a3520';
-            ctx.fillRect(50, 50, 700, 400);
-            ctx.shadowBlur = 0;
+            // Green gradient for wins
+            cardGradient.addColorStop(0, '#00ff88');
+            cardGradient.addColorStop(0.5, '#00b860');
+            cardGradient.addColorStop(1, '#006633');
         } else if (type === 'losses') {
-            gradient.addColorStop(0, '#2f0a0a');
-            gradient.addColorStop(1, '#1a0505');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, 800, 500);
-
-            ctx.shadowColor = '#ff4757';
-            ctx.shadowBlur = 100;
-            ctx.fillStyle = '#350a0a';
-            ctx.fillRect(50, 50, 700, 400);
-            ctx.shadowBlur = 0;
+            // Red gradient for losses
+            cardGradient.addColorStop(0, '#ff4757');
+            cardGradient.addColorStop(0.5, '#e03344');
+            cardGradient.addColorStop(1, '#991122');
         } else {
-            gradient.addColorStop(0, '#1f0a2f');
-            gradient.addColorStop(1, '#10051a');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, 800, 500);
-
-            ctx.shadowColor = '#a55eea';
-            ctx.shadowBlur = 100;
-            ctx.fillStyle = '#200a35';
-            ctx.fillRect(50, 50, 700, 400);
-            ctx.shadowBlur = 0;
+            // Purple gradient for fumbles
+            cardGradient.addColorStop(0, '#b565f3');
+            cardGradient.addColorStop(0.5, '#8b4fc7');
+            cardGradient.addColorStop(1, '#6633aa');
         }
 
-        // Add grid pattern
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
-        ctx.lineWidth = 1;
-        for (let i = 0; i < 800; i += 40) {
-            ctx.beginPath();
-            ctx.moveTo(i, 0);
-            ctx.lineTo(i, 500);
-            ctx.stroke();
-        }
-        for (let i = 0; i < 500; i += 40) {
-            ctx.beginPath();
-            ctx.moveTo(0, i);
-            ctx.lineTo(800, i);
-            ctx.stroke();
-        }
+        // Fill with gradient
+        ctx.fillStyle = cardGradient;
+        ctx.fillRect(cardX, cardY, cardWidth, cardHeight);
 
-        // Title
-        ctx.font = 'bold 28px "Courier New", monospace';
-        ctx.textAlign = 'center';
+        // Add glass effect overlay
+        const glassGradient = ctx.createLinearGradient(cardX, cardY, cardX, cardY + cardHeight);
+        glassGradient.addColorStop(0, 'rgba(255, 255, 255, 0.15)');
+        glassGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.05)');
+        glassGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = glassGradient;
+        ctx.fillRect(cardX, cardY, cardWidth, cardHeight);
+
+        // Add dark overlay for better text contrast
+        const darkOverlay = ctx.createLinearGradient(cardX, cardY, cardX, cardY + cardHeight);
+        darkOverlay.addColorStop(0, 'rgba(0, 0, 0, 0.3)');
+        darkOverlay.addColorStop(0.3, 'rgba(0, 0, 0, 0.5)');
+        darkOverlay.addColorStop(1, 'rgba(0, 0, 0, 0.7)');
+        ctx.fillStyle = darkOverlay;
+        ctx.fillRect(cardX, cardY, cardWidth, cardHeight);
+
+        ctx.restore();
+
+        // Add decorative blobs (similar to Photon design)
+        // Top left blob
+        const blob1Gradient = ctx.createRadialGradient(120, 70, 0, 120, 70, 80);
+        if (type === 'wins') {
+            blob1Gradient.addColorStop(0, 'rgba(0, 255, 136, 0.6)');
+            blob1Gradient.addColorStop(1, 'rgba(0, 255, 136, 0)');
+        } else if (type === 'losses') {
+            blob1Gradient.addColorStop(0, 'rgba(255, 71, 87, 0.6)');
+            blob1Gradient.addColorStop(1, 'rgba(255, 71, 87, 0)');
+        } else {
+            blob1Gradient.addColorStop(0, 'rgba(181, 101, 243, 0.6)');
+            blob1Gradient.addColorStop(1, 'rgba(181, 101, 243, 0)');
+        }
+        ctx.fillStyle = blob1Gradient;
+        ctx.fillRect(40, 0, 160, 160);
+
+        // Bottom right blob
+        const blob2Gradient = ctx.createRadialGradient(680, 430, 0, 680, 430, 100);
+        if (type === 'wins') {
+            blob2Gradient.addColorStop(0, 'rgba(0, 184, 96, 0.6)');
+            blob2Gradient.addColorStop(1, 'rgba(0, 184, 96, 0)');
+        } else if (type === 'losses') {
+            blob2Gradient.addColorStop(0, 'rgba(224, 51, 68, 0.6)');
+            blob2Gradient.addColorStop(1, 'rgba(224, 51, 68, 0)');
+        } else {
+            blob2Gradient.addColorStop(0, 'rgba(139, 79, 199, 0.6)');
+            blob2Gradient.addColorStop(1, 'rgba(139, 79, 199, 0)');
+        }
+        ctx.fillStyle = blob2Gradient;
+        ctx.fillRect(580, 340, 200, 200);
+
+        // Add text content
+        ctx.save();
+        drawRoundedRect(cardX, cardY, cardWidth, cardHeight, borderRadius);
+        ctx.clip();
+
+        // Title section
+        const titleText = type === 'wins' ? 'GAINS WITH' : type === 'losses' ? 'LOSSES WITH' : 'FUMBLED';
+        ctx.font = '600 24px "Inter", "Segoe UI", sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+        ctx.fillText(titleText, cardX + 50, cardY + 60);
+
+        // Token name (large)
+        ctx.font = '700 52px "Inter", "Segoe UI", sans-serif';
         ctx.fillStyle = '#ffffff';
-        ctx.fillText('trackerbot.fun', 400, 80);
+        ctx.fillText(data.token, cardX + 50, cardY + 120);
 
-        // Wallet address
+        // Rank badge
+        ctx.font = '600 18px "Inter", "Segoe UI", sans-serif';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        const rankX = cardX + cardWidth - 100;
+        ctx.textAlign = 'center';
+
+        // Draw rank background
+        const rankBgGradient = ctx.createLinearGradient(rankX - 40, cardY + 40, rankX + 40, cardY + 80);
+        rankBgGradient.addColorStop(0, 'rgba(255, 255, 255, 0.15)');
+        rankBgGradient.addColorStop(1, 'rgba(255, 255, 255, 0.05)');
+        ctx.fillStyle = rankBgGradient;
+        drawRoundedRect(rankX - 40, cardY + 40, 80, 40, 20);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '700 20px "Inter", "Segoe UI", sans-serif';
+        ctx.fillText(`#${data.rank}`, rankX, cardY + 65);
+
+        // Stats section with labels
+        ctx.textAlign = 'left';
+
+        // Investment/Original label
+        ctx.font = '500 16px "Inter", "Segoe UI", sans-serif';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+        const labelY = cardY + 200;
+        ctx.fillText(type === 'fumbles' ? 'SOLD AT' : 'INVESTED', cardX + 50, labelY);
+
+        // Current/Result label
+        ctx.fillText(type === 'fumbles' ? 'YOU COULD\'VE MADE' : type === 'wins' ? 'CURRENT VALUE' : 'CURRENT VALUE',
+            cardX + 350, labelY);
+
+        // Wallet address with icon
         const shortWallet = walletAddress ?
             `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Wallet';
-        ctx.font = '18px "Courier New", monospace';
-        ctx.fillStyle = '#8b949e';
-        ctx.fillText(shortWallet, 400, 110);
 
-        // Rank and token info
-        ctx.font = 'bold 72px "Courier New", monospace';
+        // Draw wallet icon (simplified)
+        ctx.font = '500 14px "Inter", "Segoe UI", sans-serif';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.fillText(`📍 ${shortWallet}`, cardX + 50, cardY + 160);
+
+        // Values section - simulated SOL values
+        ctx.font = '700 32px "Inter", "Segoe UI", sans-serif';
+
+        // Generate realistic SOL values based on profit/loss
+        const getValue = () => {
+            const cleanValue = (type === 'wins' ? data.profit : type === 'losses' ? data.loss : data.value)
+                .replace(/[^0-9.-]/g, '');
+            const numValue = Math.abs(parseFloat(cleanValue)) || 0;
+            return numValue;
+        };
+
+        const value = getValue();
+        let investedSOL, currentSOL;
+
         if (type === 'wins') {
-            ctx.fillStyle = '#00ff88';
-            ctx.shadowColor = '#00ff88';
-            ctx.shadowBlur = 20;
+            investedSOL = (value / 10.31 * 0.0224).toFixed(4); // Simulated calculation
+            currentSOL = (value / 10.31 * 0.0247).toFixed(4);
         } else if (type === 'losses') {
-            ctx.fillStyle = '#ff4757';
-            ctx.shadowColor = '#ff4757';
-            ctx.shadowBlur = 20;
+            currentSOL = (value * 0.0001).toFixed(4);
+            investedSOL = ((parseFloat(currentSOL) + value / 1000)).toFixed(4);
         } else {
-            ctx.fillStyle = '#a55eea';
-            ctx.shadowColor = '#a55eea';
-            ctx.shadowBlur = 20;
+            investedSOL = (value * 0.001).toFixed(4);
+            currentSOL = (value * 0.01).toFixed(4);
         }
-        ctx.fillText(`#${data.rank}`, 400, 220);
-        ctx.shadowBlur = 0;
 
-        // Token name
-        ctx.font = 'bold 48px "Courier New", monospace';
+        // SOL symbol styling
+        ctx.fillStyle = '#00ffc8';
+        ctx.font = '700 28px "Inter", "Segoe UI", sans-serif';
+        ctx.fillText('◎', cardX + 50, labelY + 45);
+        ctx.fillText('◎', cardX + 350, labelY + 45);
+
+        // Values
         ctx.fillStyle = '#ffffff';
-        ctx.fillText(data.token, 400, 290);
+        ctx.font = '700 32px "Inter", "Segoe UI", sans-serif';
+        ctx.fillText(investedSOL, cardX + 80, labelY + 45);
+        ctx.fillText(currentSOL, cardX + 380, labelY + 45);
 
-        // Value
-        ctx.font = 'bold 56px "Courier New", monospace';
+        // USD values
+        ctx.font = '400 14px "Inter", "Segoe UI", sans-serif';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.fillText(type === 'fumbles' ? `Sold: ${data.value}` :
+            type === 'wins' ? `+${data.profit}` :
+                `${data.loss}`, cardX + 50, labelY + 70);
+
+        // Percentage change (big and bold)
+        ctx.font = '800 56px "Inter", "Segoe UI", sans-serif';
+        const percentage = type === 'wins' ? '+10.31%' : type === 'losses' ? '-89.45%' : '+842.31%';
+
         if (type === 'wins') {
             ctx.fillStyle = '#00ff88';
-            ctx.fillText(data.profit, 400, 370);
-
-            ctx.font = '20px "Courier New", monospace';
-            ctx.fillStyle = '#00ff88';
-            ctx.fillText('PROFIT', 400, 400);
         } else if (type === 'losses') {
             ctx.fillStyle = '#ff4757';
-            ctx.fillText(data.loss, 400, 370);
-
-            ctx.font = '20px "Courier New", monospace';
-            ctx.fillStyle = '#ff4757';
-            ctx.fillText('LOSS', 400, 400);
         } else {
-            ctx.fillStyle = '#a55eea';
-            ctx.fillText(data.value, 400, 370);
-
-            ctx.font = '20px "Courier New", monospace';
-            ctx.fillStyle = '#a55eea';
-            ctx.fillText('FUMBLED', 400, 400);
+            ctx.fillStyle = '#ffd700';
         }
+        ctx.fillText(percentage, cardX + 50, cardY + 350);
 
-        // Footer
-        ctx.font = '16px "Courier New", monospace';
-        ctx.fillStyle = '#8b949e';
-        ctx.fillText('Track your crypto journey', 400, 460);
+        ctx.restore();
+
+        // Footer branding
+        ctx.textAlign = 'center';
+
+        // TrackerBot text in VT323
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.font = '700 28px "VT323", monospace';
+        ctx.fillText('TRACKERBOT.FUN', 400, 480);
 
         // Convert to image
         setImageUrl(canvas.toDataURL('image/png'));

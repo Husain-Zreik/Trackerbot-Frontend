@@ -115,14 +115,16 @@
             gap: 0.4rem;
         }
 
-        &--x {
+        // unified gradient combining primary and secondary
+        &--x,
+        &--wallet {
             background: linear-gradient(
                 135deg,
-                color-mix(in srgb, var(--primary) 40%, #00ff00) 0%,
-                color-mix(in srgb, var(--primary) 60%, #008000) 50%,
-                color-mix(in srgb, var(--primary) 80%, #32cd32) 100%
+                var(--primary) 0%,
+                var(--secondary) 50%,
+                color-mix(in srgb, var(--primary) 70%, var(--secondary)) 100%
             );
-            box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 60%, #00ff00); // reduced glow
+            box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 50%, var(--secondary));
 
             &::after {
                 content: "";
@@ -133,9 +135,9 @@
                 bottom: 0;
                 background: linear-gradient(
                     135deg,
-                    color-mix(in srgb, var(--primary) 50%, #00ff88) 0%,
-                    color-mix(in srgb, var(--primary) 70%, #00cc44) 50%,
-                    color-mix(in srgb, var(--primary) 90%, #228b22) 100%
+                    color-mix(in srgb, var(--primary) 60%, var(--secondary)) 0%,
+                    color-mix(in srgb, var(--primary) 80%, var(--secondary)) 50%,
+                    color-mix(in srgb, var(--primary) 90%, var(--secondary)) 100%
                 );
                 opacity: 0;
                 transition: opacity 0.3s ease;
@@ -143,25 +145,11 @@
             }
 
             &:hover {
-                box-shadow: 0 6px 18px color-mix(in srgb, var(--primary) 70%, #00ff44); // less intense
+                box-shadow: 0 6px 18px color-mix(in srgb, var(--primary) 70%, var(--secondary));
 
                 &::after {
                     opacity: 1;
                 }
-            }
-        }
-
-        &--wallet {
-            background: linear-gradient(
-                135deg,
-                color-mix(in srgb, var(--primary) 40%, #ffdd00) 0%,
-                color-mix(in srgb, var(--primary) 60%, #ffaa00) 50%,
-                color-mix(in srgb, var(--primary) 80%, #ff8800) 100%
-            );
-            box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 60%, #ffaa00);
-
-            &:hover {
-                box-shadow: 0 6px 18px color-mix(in srgb, var(--primary) 70%, #ffbb33);
             }
         }
     }
