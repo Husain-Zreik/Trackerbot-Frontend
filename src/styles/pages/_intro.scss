@@ -1,4 +1,4 @@
-// src/components/IntroAnimation.scss
+// src/styles/pages/_intro.scss
 @use "../variables" as variables;
 
 .intro {
@@ -43,6 +43,10 @@
         opacity: 1;
         transition: opacity 0.5s ease;
 
+        @media (max-width: variables.$breakpoint-md) {
+            gap: 1.5rem;
+        }
+
         &--hidden {
             opacity: 0;
             pointer-events: none;
@@ -58,20 +62,39 @@
                 0 0 10px rgba(0, 255, 136, 0.5),
                 0 2px 4px rgba(0, 0, 0, 0.8);
             animation: textPulse 2s ease-in-out infinite;
+
+            @media (max-width: variables.$breakpoint-md) {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+
+            @media (max-width: variables.$breakpoint-sm) {
+                font-size: 1.2rem;
+            }
         }
 
         &-bar-container {
-            width: 500px;
+            width: 31.25rem; // 500px
             max-width: 80vw;
-            height: 40px;
+            height: 2.5rem; // 40px
             background: rgba(0, 0, 0, 0.7);
             border: 2px solid rgba(0, 255, 136, 0.4);
-            border-radius: 4px;
-            padding: 4px;
+            border-radius: 0.25rem; // 4px
+            padding: 0.25rem; // 4px
             position: relative;
             box-shadow:
                 0 0 20px rgba(0, 255, 136, 0.2),
                 inset 0 0 10px rgba(0, 0, 0, 0.8);
+
+            @media (max-width: variables.$breakpoint-md) {
+                width: 21.875rem; // 350px
+                height: 1.875rem; // 30px
+            }
+
+            @media (max-width: variables.$breakpoint-sm) {
+                width: 17.5rem; // 280px
+                height: 1.5625rem; // 25px
+            }
 
             &::before {
                 content: "";
@@ -81,7 +104,7 @@
                 right: -2px;
                 bottom: -2px;
                 background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.6), transparent);
-                border-radius: 4px;
+                border-radius: 0.25rem;
                 animation: borderGlow 2s linear infinite;
                 z-index: -1;
             }
@@ -91,7 +114,7 @@
             height: 100%;
             background: linear-gradient(90deg, #00ff88, #00d96e, #00ff88);
             background-size: 200% 100%;
-            border-radius: 2px;
+            border-radius: 0.125rem; // 2px
             transition: width 0.3s ease;
             position: relative;
             box-shadow:
@@ -112,7 +135,7 @@
                     transparent 50%,
                     rgba(0, 0, 0, 0.3) 100%
                 );
-                border-radius: 2px;
+                border-radius: 0.125rem;
             }
         }
 
@@ -129,6 +152,14 @@
                 0 0 5px rgba(0, 0, 0, 1),
                 0 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 2;
+
+            @media (max-width: variables.$breakpoint-md) {
+                font-size: 1.2rem;
+            }
+
+            @media (max-width: variables.$breakpoint-sm) {
+                font-size: 1rem;
+            }
         }
     }
 
@@ -157,6 +188,14 @@
                 0 4px 8px rgba(0, 0, 0, 0.8);
             animation: logoGlow 3s ease-in-out infinite;
             position: relative;
+
+            @media (max-width: variables.$breakpoint-md) {
+                font-size: 4rem;
+            }
+
+            @media (max-width: variables.$breakpoint-sm) {
+                font-size: 3rem;
+            }
 
             // Cleaner glitch effect - less intense
             &::before,
@@ -197,6 +236,16 @@
             text-shadow:
                 0 0 10px rgba(0, 255, 136, 0.4),
                 0 2px 4px rgba(0, 0, 0, 0.8);
+
+            @media (max-width: variables.$breakpoint-md) {
+                font-size: 1.2rem;
+                letter-spacing: 4px;
+            }
+
+            @media (max-width: variables.$breakpoint-sm) {
+                font-size: 1rem;
+                letter-spacing: 3px;
+            }
         }
     }
 }
@@ -320,65 +369,5 @@
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-// ============================
-// RESPONSIVE
-// ============================
-@media (max-width: variables.$breakpoint-md) {
-    .intro {
-        &__loading {
-            &-text {
-                font-size: 1.5rem;
-                letter-spacing: 2px;
-            }
-
-            &-bar-container {
-                width: 350px;
-                height: 30px;
-            }
-
-            &-percentage {
-                font-size: 1.2rem;
-            }
-        }
-
-        &__logo {
-            &-text {
-                font-size: 4rem;
-            }
-
-            &-tagline {
-                font-size: 1.2rem;
-                letter-spacing: 4px;
-            }
-        }
-    }
-}
-
-@media (max-width: variables.$breakpoint-sm) {
-    .intro {
-        &__loading {
-            &-text {
-                font-size: 1.2rem;
-            }
-
-            &-bar-container {
-                width: 280px;
-                height: 25px;
-            }
-        }
-
-        &__logo {
-            &-text {
-                font-size: 3rem;
-            }
-
-            &-tagline {
-                font-size: 1rem;
-                letter-spacing: 3px;
-            }
-        }
     }
 }
