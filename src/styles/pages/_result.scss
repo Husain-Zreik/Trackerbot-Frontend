@@ -8,7 +8,7 @@
     // ============================
     .main {
         padding: 2rem 2rem 2rem 2rem;
-        max-width: 75rem; // 1200px
+        max-width: 75rem;
         margin: 0 auto;
         position: relative;
 
@@ -36,145 +36,8 @@
         }
     }
 
-    &__new-search-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        background: transparent;
-        color: var(--text);
-        border: 2px solid var(--text-secondary);
-        border-radius: 0.75rem; // 12px
-        padding: 0.75rem 1.25rem;
-        font-size: 0.95rem;
-        font-weight: 600;
-        font-family: inherit;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        position: relative;
-        overflow: hidden;
-
-        &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        &:hover {
-            transform: translateY(-2px);
-            background: var(--background-secondary);
-            border-color: var(--primary);
-            color: var(--primary);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-
-            &::before {
-                left: 100%;
-            }
-
-            i {
-                transform: translateX(-3px);
-            }
-        }
-
-        &:active {
-            transform: translateY(0);
-        }
-
-        i {
-            transition: transform 0.3s ease;
-        }
-
-        @media (max-width: variables.$breakpoint-md) {
-            width: 100%;
-            justify-content: center;
-        }
-    }
-
-    &__new-search-btn {
-        background: linear-gradient(
-            135deg,
-            color-mix(in srgb, var(--primary) 10%, transparent) 0%,
-            color-mix(in srgb, var(--primary) 5%, transparent) 100%
-        );
-        border-color: var(--primary);
-        color: var(--primary);
-
-        &:hover {
-            background: var(--primary);
-            color: var(--background);
-            border-color: var(--primary);
-            box-shadow: 0 4px 20px color-mix(in srgb, var(--primary) 40%, transparent);
-
-            i {
-                transform: rotate(-10deg) scale(1.1);
-            }
-        }
-    }
-
     // ============================
-    // CARD SHARE BUTTON
-    // ============================
-    &__card-share-btn {
-        background: rgba(29, 161, 242, 0.2);
-        color: var(--text);
-        border: 1px solid rgba(29, 161, 242, 0.3);
-        border-radius: 0.5rem; // 8px
-        padding: 0.5rem;
-        width: 2rem; // 32px
-        height: 2rem; // 32px
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-
-        &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(29, 161, 242, 0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        &:hover {
-            background: rgba(29, 161, 242, 0.4);
-            border-color: rgba(29, 161, 242, 0.6);
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3);
-
-            &::before {
-                left: 100%;
-            }
-
-            .result__card-share-icon {
-                transform: rotate(-10deg);
-            }
-        }
-
-        &:active {
-            transform: scale(1.05);
-        }
-    }
-
-    &__card-share-icon {
-        width: 1rem; // 16px
-        height: 1rem; // 16px
-        transition: transform 0.3s ease;
-    }
-
-    // ============================
-    // TOP STATS ROW - ENHANCED
+    // TOP STATS ROW
     // ============================
     &__stats {
         margin-bottom: 2rem;
@@ -206,10 +69,10 @@
             color-mix(in srgb, var(--background-secondary) 95%, var(--primary)) 100%
         );
         border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 1rem; // 16px
+        border-radius: 1rem;
         padding: 1.5rem 1rem;
         text-align: center;
-        min-height: 7.5rem; // 120px
+        min-height: 7.5rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -220,12 +83,12 @@
             inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
         @media (max-width: variables.$breakpoint-md) {
-            min-height: 6.5rem; // 104px
+            min-height: 6.5rem;
             padding: 1.25rem 0.875rem;
         }
 
         @media (max-width: variables.$breakpoint-sm) {
-            min-height: 6rem; // 96px
+            min-height: 6rem;
             padding: 1rem 0.75rem;
         }
 
@@ -287,7 +150,7 @@
     }
 
     // ============================
-    // BOTTOM ANALYSIS ROW - CRYPTO STYLE WITH SCROLL
+    // ANALYSIS GRID
     // ============================
     &__analysis {
         &-grid {
@@ -308,357 +171,11 @@
                 gap: 1.5rem;
             }
         }
-
-        &-card {
-            background: linear-gradient(
-                135deg,
-                var(--background-secondary) 0%,
-                color-mix(in srgb, var(--background-secondary) 98%, #000000) 100%
-            );
-            border-radius: 1rem; // 16px
-            padding: 0;
-            min-height: 26.25rem; // 420px
-            max-height: 32.5rem; // 520px
-            border: 3px solid;
-            position: relative;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-
-            @media (max-width: variables.$breakpoint-md) {
-                min-height: 23.75rem; // 380px
-                max-height: 28.125rem; // 450px
-            }
-
-            @media (max-width: variables.$breakpoint-sm) {
-                min-height: 21.875rem; // 350px
-                max-height: 25rem; // 400px
-                border-width: 2px;
-            }
-
-            &::after {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
-                pointer-events: none;
-            }
-
-            &:hover {
-                transform: translateY(-3px);
-                filter: brightness(1.05);
-            }
-
-            // Win card styling - green glow
-            &--wins {
-                border-color: #00ff88;
-                box-shadow:
-                    0 4px 20px rgba(0, 255, 136, 0.15),
-                    inset 0 1px 0 rgba(0, 255, 136, 0.1);
-
-                &::before {
-                    background: linear-gradient(90deg, #00ff88, #22c55e);
-                }
-
-                &:hover {
-                    box-shadow:
-                        0 8px 40px rgba(0, 255, 136, 0.25),
-                        0 0 30px rgba(0, 255, 136, 0.15),
-                        inset 0 1px 0 rgba(0, 255, 136, 0.15);
-                }
-
-                .result__scroll-hint {
-                    background: linear-gradient(to bottom, transparent, rgba(0, 255, 136, 0.1));
-                }
-            }
-
-            // Loss card styling - red glow
-            &--losses {
-                border-color: #ff4757;
-                box-shadow:
-                    0 4px 20px rgba(255, 71, 87, 0.15),
-                    inset 0 1px 0 rgba(255, 71, 87, 0.1);
-
-                &::before {
-                    background: linear-gradient(90deg, #ff4757, #ef4444);
-                }
-
-                &:hover {
-                    box-shadow:
-                        0 8px 40px rgba(255, 71, 87, 0.25),
-                        0 0 30px rgba(255, 71, 87, 0.15),
-                        inset 0 1px 0 rgba(255, 71, 87, 0.15);
-                }
-
-                .result__scroll-hint {
-                    background: linear-gradient(to bottom, transparent, rgba(255, 71, 87, 0.1));
-                }
-            }
-
-            // Fumble card styling - purple glow
-            &--fumbles {
-                border-color: #a55eea;
-                box-shadow:
-                    0 4px 20px rgba(165, 94, 234, 0.15),
-                    inset 0 1px 0 rgba(165, 94, 234, 0.1);
-
-                &::before {
-                    background: linear-gradient(90deg, #a55eea, #8b5cf6);
-                }
-
-                &:hover {
-                    box-shadow:
-                        0 8px 40px rgba(165, 94, 234, 0.25),
-                        0 0 30px rgba(165, 94, 234, 0.15),
-                        inset 0 1px 0 rgba(165, 94, 234, 0.15);
-                }
-
-                .result__scroll-hint {
-                    background: linear-gradient(to bottom, transparent, rgba(165, 94, 234, 0.1));
-                }
-            }
-        }
-
-        &-header-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem 2rem 2rem 2rem;
-
-            @media (max-width: variables.$breakpoint-md) {
-                padding: 1.5rem 1.5rem 1.5rem 1.5rem;
-            }
-
-            @media (max-width: variables.$breakpoint-sm) {
-                padding: 1.25rem 1rem 1.25rem 1rem;
-            }
-        }
-
-        &-title {
-            font-size: 1.3rem;
-            color: var(--text);
-            margin: 0;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-
-            @media (max-width: variables.$breakpoint-md) {
-                font-size: 1.2rem;
-            }
-
-            @media (max-width: variables.$breakpoint-sm) {
-                font-size: 1.1rem;
-            }
-        }
-
-        &-header {
-            display: flex;
-            justify-content: space-between;
-            padding: 0 2rem 1.5rem 2rem;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 500;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-
-            @media (max-width: variables.$breakpoint-md) {
-                padding: 0 1.5rem 1.25rem 1.5rem;
-                font-size: 0.9rem;
-            }
-
-            @media (max-width: variables.$breakpoint-sm) {
-                padding: 0 1rem 1rem 1rem;
-                font-size: 0.85rem;
-            }
-        }
-
-        &-content {
-            padding: 0;
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
-            max-height: 18.75rem; // 300px
-            position: relative;
-            overflow: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-
-            @media (max-width: variables.$breakpoint-md) {
-                max-height: 16.25rem; // 260px
-            }
-
-            @media (max-width: variables.$breakpoint-sm) {
-                max-height: 15rem; // 240px
-            }
-        }
-
-        &-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.2s ease;
-            position: relative;
-
-            @media (max-width: variables.$breakpoint-md) {
-                padding: 0.875rem 1.5rem;
-            }
-
-            @media (max-width: variables.$breakpoint-sm) {
-                padding: 0.75rem 1rem;
-            }
-
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.02);
-
-                .result__analysis-rank {
-                    color: var(--primary);
-                    transform: scale(1.1);
-                }
-            }
-
-            &:last-child {
-                border-bottom: none;
-            }
-        }
-
-        &-rank {
-            position: absolute;
-            left: 0.5rem;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-            opacity: 0.6;
-            transition: all 0.2s ease;
-            min-width: 1.5rem;
-
-            @media (max-width: variables.$breakpoint-sm) {
-                font-size: 0.75rem;
-            }
-        }
     }
 
     // ============================
-    // SCROLL HINT
+    // WALLET SELECTOR
     // ============================
-    &__scroll-hint {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 3.125rem; // 50px
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.3rem;
-        color: var(--text-secondary);
-        font-size: 0.85rem;
-        pointer-events: none;
-        animation: scrollPulse 2s infinite;
-        z-index: 2;
-
-        @media (max-width: variables.$breakpoint-sm) {
-            height: 2.5rem; // 40px
-            font-size: 0.8rem;
-        }
-
-        i {
-            font-size: 0.8rem;
-            animation: bounce 1.5s infinite;
-
-            @media (max-width: variables.$breakpoint-sm) {
-                font-size: 0.75rem;
-            }
-        }
-
-        span {
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-            opacity: 0.8;
-        }
-    }
-
-    // ============================
-    // DATA ELEMENTS - CRYPTO STYLE
-    // ============================
-    .result__token {
-        color: var(--text);
-        font-weight: 600;
-        font-size: 1rem;
-        font-family: "Courier New", monospace;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        margin-left: 2rem;
-
-        @media (max-width: variables.$breakpoint-md) {
-            font-size: 0.95rem;
-            margin-left: 1.5rem;
-        }
-
-        @media (max-width: variables.$breakpoint-sm) {
-            font-size: 0.9rem;
-            margin-left: 1rem;
-        }
-    }
-
-    .result__profit {
-        color: #00ff88;
-        font-weight: 700;
-        font-size: 1.1rem;
-        font-family: "Courier New", monospace;
-        text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
-        filter: brightness(1.1);
-
-        @media (max-width: variables.$breakpoint-md) {
-            font-size: 1rem;
-        }
-
-        @media (max-width: variables.$breakpoint-sm) {
-            font-size: 0.95rem;
-        }
-    }
-
-    .result__loss {
-        color: #ff4757;
-        font-weight: 700;
-        font-size: 1.1rem;
-        font-family: "Courier New", monospace;
-        text-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
-        filter: brightness(1.1);
-
-        @media (max-width: variables.$breakpoint-md) {
-            font-size: 1rem;
-        }
-
-        @media (max-width: variables.$breakpoint-sm) {
-            font-size: 0.95rem;
-        }
-    }
-
-    .result__value {
-        color: var(--text);
-        font-weight: 700;
-        font-size: 1.1rem;
-        font-family: "Courier New", monospace;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        filter: brightness(1.05);
-
-        @media (max-width: variables.$breakpoint-md) {
-            font-size: 1rem;
-        }
-
-        @media (max-width: variables.$breakpoint-sm) {
-            font-size: 0.95rem;
-        }
-    }
-
     &__wallet-selector {
         display: flex;
         justify-content: space-between;
@@ -706,7 +223,7 @@
         padding: 0.75rem 1.25rem;
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 0.75rem; // 12px
+        border-radius: 0.75rem;
         color: var(--text-secondary);
         font-family: "Courier New", monospace;
         font-size: 0.9rem;
@@ -775,43 +292,13 @@
         }
     }
 
-    &__wallet-nav-btn {
-        width: 2rem; // 32px
-        height: 2rem; // 32px
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: var(--text);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-
-        &:hover:not(:disabled) {
-            background: rgba(0, 255, 136, 0.1);
-            border-color: rgba(0, 255, 136, 0.3);
-            color: var(--primary);
-            transform: scale(1.1);
-        }
-
-        &:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        i {
-            font-size: 0.8rem;
-        }
-    }
-
     &__wallet-counter {
         font-size: 0.9rem;
         color: var(--text-secondary);
         font-weight: 500;
         padding: 0.25rem 0.75rem;
         background: rgba(255, 255, 255, 0.03);
-        border-radius: 1.25rem; // 20px
+        border-radius: 1.25rem;
         border: 1px solid rgba(255, 255, 255, 0.1);
 
         @media (max-width: variables.$breakpoint-sm) {
@@ -819,7 +306,9 @@
         }
     }
 
-    // Current Wallet Badge
+    // ============================
+    // CURRENT WALLET BADGE
+    // ============================
     &__current-wallet {
         display: flex;
         justify-content: center;
@@ -834,7 +323,7 @@
         padding: 1rem 1.5rem;
         background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 136, 0.02));
         border: 1px solid rgba(0, 255, 136, 0.2);
-        border-radius: 3.125rem; // 50px
+        border-radius: 3.125rem;
         position: relative;
         overflow: hidden;
 
@@ -884,143 +373,11 @@
             }
         }
     }
-
-    // Column alignment fixes
-    &__header-left {
-        flex: 1;
-        text-align: left;
-        padding-left: 3.5rem;
-
-        @media (max-width: variables.$breakpoint-md) {
-            padding-left: 3rem;
-        }
-
-        @media (max-width: variables.$breakpoint-sm) {
-            padding-left: 2.5rem;
-        }
-    }
-
-    &__header-right {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding-right: 3.5rem;
-
-        @media (max-width: variables.$breakpoint-md) {
-            padding-right: 3rem;
-        }
-
-        @media (max-width: variables.$breakpoint-sm) {
-            padding-right: 2.5rem;
-        }
-    }
-
-    &__row-left {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    &__value-container {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        justify-content: flex-end;
-
-        @media (max-width: variables.$breakpoint-sm) {
-            gap: 0.5rem;
-        }
-    }
-
-    &__profit,
-    &__loss,
-    &__value {
-        min-width: 6.25rem; // 100px
-
-        @media (max-width: variables.$breakpoint-md) {
-            min-width: 5.625rem; // 90px
-        }
-
-        @media (max-width: variables.$breakpoint-sm) {
-            min-width: 5rem; // 80px
-        }
-        text-align: right;
-    }
-
-    &__item-share-btn {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        padding: 0;
-        width: 1.75rem; // 28px
-        height: 1.75rem; // 28px
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        opacity: 0.3;
-        position: relative;
-
-        @media (max-width: variables.$breakpoint-sm) {
-            width: 1.5rem; // 24px
-            height: 1.5rem; // 24px
-        }
-
-        &::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(29, 161, 242, 0.4), transparent);
-            opacity: 0;
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-
-        &:hover {
-            opacity: 1;
-            background: rgba(29, 161, 242, 0.15);
-            border-color: rgba(29, 161, 242, 0.4);
-            transform: scale(1.15) rotate(15deg);
-
-            &::before {
-                opacity: 1;
-                width: 150%;
-                height: 150%;
-            }
-
-            .result__item-share-icon {
-                stroke: #1da1f2;
-                filter: drop-shadow(0 0 4px rgba(29, 161, 242, 0.5));
-            }
-        }
-
-        &:active {
-            transform: scale(1.05) rotate(10deg);
-        }
-    }
-
-    &__item-share-icon {
-        width: 0.875rem; // 14px
-        height: 0.875rem; // 14px
-        color: var(--text-secondary);
-        transition: all 0.3s ease;
-        stroke-width: 2.5;
-
-        @media (max-width: variables.$breakpoint-sm) {
-            width: 0.75rem; // 12px
-            height: 0.75rem; // 12px
-        }
-    }
 }
 
-// Animation for the indicator
+// ============================
+// ANIMATIONS
+// ============================
 @keyframes slideIn {
     from {
         width: 0;
@@ -1039,29 +396,6 @@
     50%,
     100% {
         left: 100%;
-    }
-}
-
-// ============================
-// ANIMATIONS
-// ============================
-@keyframes scrollPulse {
-    0%,
-    100% {
-        opacity: 0.6;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-
-@keyframes bounce {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(3px);
     }
 }
 

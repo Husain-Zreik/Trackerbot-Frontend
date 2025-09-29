@@ -1,0 +1,531 @@
+// src/styles/components/_cards.scss
+@use "../variables" as variables;
+
+// ============================
+// ANALYSIS CARD COMPONENT
+// ============================
+
+.analysis-card {
+    background: linear-gradient(
+        135deg,
+        var(--background-secondary) 0%,
+        color-mix(in srgb, var(--background-secondary) 98%, #000000) 100%
+    );
+    border-radius: 1rem;
+    padding: 0;
+    min-height: 26.25rem;
+    max-height: 32.5rem;
+    border: 3px solid;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: variables.$breakpoint-md) {
+        min-height: 23.75rem;
+        max-height: 28.125rem;
+    }
+
+    @media (max-width: variables.$breakpoint-sm) {
+        min-height: 21.875rem;
+        max-height: 25rem;
+        border-width: 2px;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+        pointer-events: none;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        filter: brightness(1.05);
+    }
+
+    // ============================
+    // CARD VARIANTS
+    // ============================
+
+    // Win card styling - green glow
+    &--wins {
+        border-color: #00ff88;
+        box-shadow:
+            0 4px 20px rgba(0, 255, 136, 0.15),
+            inset 0 1px 0 rgba(0, 255, 136, 0.1);
+
+        &::before {
+            background: linear-gradient(90deg, #00ff88, #22c55e);
+        }
+
+        &:hover {
+            box-shadow:
+                0 8px 40px rgba(0, 255, 136, 0.25),
+                0 0 30px rgba(0, 255, 136, 0.15),
+                inset 0 1px 0 rgba(0, 255, 136, 0.15);
+        }
+
+        .analysis-card__scroll-hint {
+            background: linear-gradient(to bottom, transparent, rgba(0, 255, 136, 0.1));
+        }
+    }
+
+    // Loss card styling - red glow
+    &--losses {
+        border-color: #ff4757;
+        box-shadow:
+            0 4px 20px rgba(255, 71, 87, 0.15),
+            inset 0 1px 0 rgba(255, 71, 87, 0.1);
+
+        &::before {
+            background: linear-gradient(90deg, #ff4757, #ef4444);
+        }
+
+        &:hover {
+            box-shadow:
+                0 8px 40px rgba(255, 71, 87, 0.25),
+                0 0 30px rgba(255, 71, 87, 0.15),
+                inset 0 1px 0 rgba(255, 71, 87, 0.15);
+        }
+
+        .analysis-card__scroll-hint {
+            background: linear-gradient(to bottom, transparent, rgba(255, 71, 87, 0.1));
+        }
+    }
+
+    // Fumble card styling - purple glow
+    &--fumbles {
+        border-color: #a55eea;
+        box-shadow:
+            0 4px 20px rgba(165, 94, 234, 0.15),
+            inset 0 1px 0 rgba(165, 94, 234, 0.1);
+
+        &::before {
+            background: linear-gradient(90deg, #a55eea, #8b5cf6);
+        }
+
+        &:hover {
+            box-shadow:
+                0 8px 40px rgba(165, 94, 234, 0.25),
+                0 0 30px rgba(165, 94, 234, 0.15),
+                inset 0 1px 0 rgba(165, 94, 234, 0.15);
+        }
+
+        .analysis-card__scroll-hint {
+            background: linear-gradient(to bottom, transparent, rgba(165, 94, 234, 0.1));
+        }
+    }
+
+    // ============================
+    // CARD HEADER
+    // ============================
+
+    &__header-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 2rem 2rem 2rem;
+
+        @media (max-width: variables.$breakpoint-md) {
+            padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            padding: 1.25rem 1rem 1.25rem 1rem;
+        }
+    }
+
+    &__title {
+        font-size: 1.3rem;
+        color: var(--text);
+        margin: 0;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+
+        @media (max-width: variables.$breakpoint-md) {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            font-size: 1.1rem;
+        }
+    }
+
+    &__column-headers {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 2rem 1.5rem 2rem;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+
+        @media (max-width: variables.$breakpoint-md) {
+            padding: 0 1.5rem 1.25rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            padding: 0 1rem 1rem 1rem;
+            font-size: 0.85rem;
+        }
+    }
+
+    &__header-left {
+        flex: 1;
+        text-align: left;
+        padding-left: 3.5rem;
+
+        @media (max-width: variables.$breakpoint-md) {
+            padding-left: 3rem;
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            padding-left: 2.5rem;
+        }
+    }
+
+    &__header-right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 3.5rem;
+
+        @media (max-width: variables.$breakpoint-md) {
+            padding-right: 3rem;
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            padding-right: 2.5rem;
+        }
+    }
+
+    // ============================
+    // CARD CONTENT
+    // ============================
+
+    &__content {
+        padding: 0;
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 18.75rem;
+        position: relative;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (max-width: variables.$breakpoint-md) {
+            max-height: 16.25rem;
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            max-height: 15rem;
+        }
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.2s ease;
+        position: relative;
+
+        @media (max-width: variables.$breakpoint-md) {
+            padding: 0.875rem 1.5rem;
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            padding: 0.75rem 1rem;
+        }
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+
+            .analysis-card__rank {
+                color: var(--primary);
+                transform: scale(1.1);
+            }
+
+            .analysis-card__share-btn {
+                opacity: 0.6;
+            }
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__row-left {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__rank {
+        min-width: 2.5rem;
+        text-align: right;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+        opacity: 0.6;
+        transition: all 0.2s ease;
+
+        @media (max-width: variables.$breakpoint-sm) {
+            font-size: 0.75rem;
+            min-width: 2rem;
+        }
+    }
+
+    &__token {
+        color: var(--text);
+        font-weight: 600;
+        font-size: 1rem;
+        font-family: "Courier New", monospace;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+        @media (max-width: variables.$breakpoint-md) {
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            font-size: 0.9rem;
+        }
+    }
+
+    // ============================
+    // VALUE CONTAINER
+    // ============================
+
+    &__value-container {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        justify-content: flex-end;
+
+        @media (max-width: variables.$breakpoint-sm) {
+            gap: 0.5rem;
+        }
+    }
+
+    &__profit {
+        color: #00ff88;
+        font-weight: 700;
+        font-size: 1.1rem;
+        font-family: "Courier New", monospace;
+        text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        filter: brightness(1.1);
+        min-width: 6.25rem;
+        text-align: right;
+
+        @media (max-width: variables.$breakpoint-md) {
+            font-size: 1rem;
+            min-width: 5.625rem;
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            font-size: 0.95rem;
+            min-width: 5rem;
+        }
+    }
+
+    &__loss {
+        color: #ff4757;
+        font-weight: 700;
+        font-size: 1.1rem;
+        font-family: "Courier New", monospace;
+        text-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
+        filter: brightness(1.1);
+        min-width: 6.25rem;
+        text-align: right;
+
+        @media (max-width: variables.$breakpoint-md) {
+            font-size: 1rem;
+            min-width: 5.625rem;
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            font-size: 0.95rem;
+            min-width: 5rem;
+        }
+    }
+
+    &__value {
+        color: var(--text);
+        font-weight: 700;
+        font-size: 1.1rem;
+        font-family: "Courier New", monospace;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        filter: brightness(1.05);
+        min-width: 6.25rem;
+        text-align: right;
+
+        @media (max-width: variables.$breakpoint-md) {
+            font-size: 1rem;
+            min-width: 5.625rem;
+        }
+
+        @media (max-width: variables.$breakpoint-sm) {
+            font-size: 0.95rem;
+            min-width: 5rem;
+        }
+    }
+
+    // ============================
+    // SHARE BUTTON
+    // ============================
+
+    &__share-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        padding: 0;
+        width: 1.75rem;
+        height: 1.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0.3;
+        position: relative;
+
+        @media (max-width: variables.$breakpoint-sm) {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(29, 161, 242, 0.4), transparent);
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        &:hover {
+            opacity: 1;
+            background: rgba(29, 161, 242, 0.15);
+            border-color: rgba(29, 161, 242, 0.4);
+            transform: scale(1.15) rotate(15deg);
+
+            &::before {
+                opacity: 1;
+                width: 150%;
+                height: 150%;
+            }
+
+            .analysis-card__share-icon {
+                stroke: #1da1f2;
+                filter: drop-shadow(0 0 4px rgba(29, 161, 242, 0.5));
+            }
+        }
+
+        &:active {
+            transform: scale(1.05) rotate(10deg);
+        }
+    }
+
+    &__share-icon {
+        width: 0.875rem;
+        height: 0.875rem;
+        color: var(--text-secondary);
+        transition: all 0.3s ease;
+        stroke-width: 2.5;
+
+        @media (max-width: variables.$breakpoint-sm) {
+            width: 0.75rem;
+            height: 0.75rem;
+        }
+    }
+
+    // ============================
+    // SCROLL HINT
+    // ============================
+
+    &__scroll-hint {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3.125rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        pointer-events: none;
+        animation: scrollPulse 2s infinite;
+        z-index: 2;
+
+        @media (max-width: variables.$breakpoint-sm) {
+            height: 2.5rem;
+            font-size: 0.8rem;
+        }
+
+        i {
+            font-size: 0.8rem;
+            animation: bounce 1.5s infinite;
+
+            @media (max-width: variables.$breakpoint-sm) {
+                font-size: 0.75rem;
+            }
+        }
+
+        span {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+    }
+}
+
+// ============================
+// ANIMATIONS
+// ============================
+
+@keyframes scrollPulse {
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(3px);
+    }
+}

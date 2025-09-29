@@ -7,7 +7,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #05090a;
+    background: var(--background);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,11 +55,11 @@
         &-text {
             font-family: variables.$font-pixel2;
             font-size: 2rem;
-            color: #00ff88;
+            color: var(--secondary);
             text-transform: uppercase;
             letter-spacing: 4px;
             text-shadow:
-                0 0 10px rgba(0, 255, 136, 0.5),
+                0 0 10px color-mix(in srgb, var(--secondary) 50%, transparent),
                 0 2px 4px rgba(0, 0, 0, 0.8);
             animation: textPulse 2s ease-in-out infinite;
 
@@ -74,26 +74,26 @@
         }
 
         &-bar-container {
-            width: 31.25rem; // 500px
+            width: 31.25rem;
             max-width: 80vw;
-            height: 2.5rem; // 40px
+            height: 2.5rem;
             background: rgba(0, 0, 0, 0.7);
-            border: 2px solid rgba(0, 255, 136, 0.4);
-            border-radius: 0.25rem; // 4px
-            padding: 0.25rem; // 4px
+            border: 2px solid color-mix(in srgb, var(--secondary) 40%, transparent);
+            border-radius: 0.25rem;
+            padding: 0.25rem;
             position: relative;
             box-shadow:
-                0 0 20px rgba(0, 255, 136, 0.2),
+                0 0 20px color-mix(in srgb, var(--secondary) 20%, transparent),
                 inset 0 0 10px rgba(0, 0, 0, 0.8);
 
             @media (max-width: variables.$breakpoint-md) {
-                width: 21.875rem; // 350px
-                height: 1.875rem; // 30px
+                width: 21.875rem;
+                height: 1.875rem;
             }
 
             @media (max-width: variables.$breakpoint-sm) {
-                width: 17.5rem; // 280px
-                height: 1.5625rem; // 25px
+                width: 17.5rem;
+                height: 1.5625rem;
             }
 
             &::before {
@@ -103,7 +103,12 @@
                 left: -2px;
                 right: -2px;
                 bottom: -2px;
-                background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.6), transparent);
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    color-mix(in srgb, var(--secondary) 60%, transparent),
+                    transparent
+                );
                 border-radius: 0.25rem;
                 animation: borderGlow 2s linear infinite;
                 z-index: -1;
@@ -112,13 +117,13 @@
 
         &-bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, #00ff88, #00d96e, #00ff88);
+            background: linear-gradient(90deg, var(--secondary), var(--secondary), var(--secondary));
             background-size: 200% 100%;
-            border-radius: 0.125rem; // 2px
+            border-radius: 0.125rem;
             transition: width 0.3s ease;
             position: relative;
             box-shadow:
-                0 0 15px rgba(0, 255, 136, 0.6),
+                0 0 15px color-mix(in srgb, var(--secondary) 60%, transparent),
                 inset 0 2px 4px rgba(255, 255, 255, 0.2);
             animation: barShine 1.5s linear infinite;
 
@@ -179,12 +184,12 @@
         &-text {
             font-family: variables.$font-pixel2;
             font-size: 8rem;
-            color: #00ff88;
+            color: var(--secondary);
             text-transform: lowercase;
             letter-spacing: -2px;
             text-shadow:
-                0 0 20px rgba(0, 255, 136, 0.6),
-                0 0 40px rgba(0, 255, 136, 0.3),
+                0 0 20px color-mix(in srgb, var(--secondary) 60%, transparent),
+                0 0 40px color-mix(in srgb, var(--secondary) 30%, transparent),
                 0 4px 8px rgba(0, 0, 0, 0.8);
             animation: logoGlow 3s ease-in-out infinite;
             position: relative;
@@ -211,30 +216,30 @@
 
             &::before {
                 animation: glitch1 4s infinite;
-                color: #ff00de;
+                color: color-mix(in srgb, var(--secondary) 80%, #ff00de);
                 z-index: -1;
-                text-shadow: 0 0 10px rgba(255, 0, 222, 0.8);
+                text-shadow: 0 0 10px color-mix(in srgb, var(--secondary) 80%, transparent);
             }
 
             &::after {
                 animation: glitch2 4s infinite;
-                color: #00fff9;
+                color: color-mix(in srgb, var(--secondary) 80%, #00fff9);
                 z-index: -2;
-                text-shadow: 0 0 10px rgba(0, 255, 249, 0.8);
+                text-shadow: 0 0 10px color-mix(in srgb, var(--secondary) 80%, transparent);
             }
         }
 
         &-tagline {
             font-family: variables.$font-pixel2;
             font-size: 1.8rem;
-            color: rgba(0, 255, 136, 0.9);
+            color: color-mix(in srgb, var(--secondary) 90%, transparent);
             text-transform: uppercase;
             letter-spacing: 8px;
             margin-top: 1rem;
             animation: taglineFade 1s ease-in 0.5s forwards;
             opacity: 0;
             text-shadow:
-                0 0 10px rgba(0, 255, 136, 0.4),
+                0 0 10px color-mix(in srgb, var(--secondary) 40%, transparent),
                 0 2px 4px rgba(0, 0, 0, 0.8);
 
             @media (max-width: variables.$breakpoint-md) {
@@ -258,13 +263,13 @@
     100% {
         opacity: 0.8;
         text-shadow:
-            0 0 10px rgba(0, 255, 136, 0.5),
+            0 0 10px color-mix(in srgb, var(--secondary) 50%, transparent),
             0 2px 4px rgba(0, 0, 0, 0.8);
     }
     50% {
         opacity: 1;
         text-shadow:
-            0 0 15px rgba(0, 255, 136, 0.7),
+            0 0 15px color-mix(in srgb, var(--secondary) 70%, transparent),
             0 2px 4px rgba(0, 0, 0, 0.8);
     }
 }
@@ -306,14 +311,14 @@
     0%,
     100% {
         text-shadow:
-            0 0 20px rgba(0, 255, 136, 0.6),
-            0 0 40px rgba(0, 255, 136, 0.3),
+            0 0 20px color-mix(in srgb, var(--secondary) 60%, transparent),
+            0 0 40px color-mix(in srgb, var(--secondary) 30%, transparent),
             0 4px 8px rgba(0, 0, 0, 0.8);
     }
     50% {
         text-shadow:
-            0 0 30px rgba(0, 255, 136, 0.8),
-            0 0 60px rgba(0, 255, 136, 0.5),
+            0 0 30px color-mix(in srgb, var(--secondary) 80%, transparent),
+            0 0 60px color-mix(in srgb, var(--secondary) 50%, transparent),
             0 4px 8px rgba(0, 0, 0, 0.8);
     }
 }

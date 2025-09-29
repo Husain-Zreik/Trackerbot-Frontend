@@ -155,21 +155,6 @@ const SearchBar = () => {
                     </button>
                 </div>
             )}
-
-            <div className="search-bar__helpers">
-                {wallets.length > 0 ? (
-                    <div className="search-bar__count">
-                        <span className="search-bar__count-number">{wallets.length}</span>
-                        <span>wallet{wallets.length > 1 ? 's' : ''} selected</span>
-                    </div>
-                ) :
-                    (
-                        <div className="search-bar__info">
-                            <i className="fa-solid fa-info-circle"></i>
-                            <span>Paste multiple wallets separated by commas, spaces, or line breaks</span>
-                        </div>
-                    )}
-            </div>
         </form>
     );
 };

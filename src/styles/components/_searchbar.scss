@@ -244,21 +244,6 @@
         }
     }
 
-    &__helpers {
-        margin-top: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        @media (max-width: variables.$breakpoint-md) {
-            margin-top: 0.75rem;
-        }
-
-        @media (max-width: variables.$breakpoint-sm) {
-            margin-top: 0.5rem;
-        }
-    }
-
     &__info {
         display: flex;
         align-items: center;

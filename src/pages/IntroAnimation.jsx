@@ -1,4 +1,3 @@
-// src/components/IntroAnimation.jsx
 import { useState, useEffect, useRef } from 'react';
 
 const IntroAnimation = ({ onComplete }) => {
@@ -17,6 +16,12 @@ const IntroAnimation = ({ onComplete }) => {
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+
+        // Get CSS variable colors
+        const getPrimaryColor = () => {
+            return getComputedStyle(document.documentElement)
+                .getPropertyValue('--primary').trim();
+        };
 
         // Particle class
         class Particle {
@@ -54,14 +59,20 @@ const IntroAnimation = ({ onComplete }) => {
             }
 
             draw() {
-                ctx.fillStyle = `rgba(0, 255, 136, ${this.currentOpacity})`;
+                const primaryColor = getPrimaryColor();
+                // Convert hex to rgba
+                const r = parseInt(primaryColor.slice(1, 3), 16);
+                const g = parseInt(primaryColor.slice(3, 5), 16);
+                const b = parseInt(primaryColor.slice(5, 7), 16);
+
+                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${this.currentOpacity})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
 
                 // Glow effect
                 ctx.shadowBlur = 15;
-                ctx.shadowColor = 'rgba(0, 255, 136, 0.8)';
+                ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.8)`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -79,6 +90,11 @@ const IntroAnimation = ({ onComplete }) => {
         // Connect nearby particles
         const connectParticles = () => {
             const maxDistance = 120;
+            const primaryColor = getPrimaryColor();
+            const r = parseInt(primaryColor.slice(1, 3), 16);
+            const g = parseInt(primaryColor.slice(3, 5), 16);
+            const b = parseInt(primaryColor.slice(5, 7), 16);
+
             for (let i = 0; i < particlesRef.current.length; i++) {
                 for (let j = i + 1; j < particlesRef.current.length; j++) {
                     const dx = particlesRef.current[i].x - particlesRef.current[j].x;
@@ -87,7 +103,7 @@ const IntroAnimation = ({ onComplete }) => {
 
                     if (distance < maxDistance) {
                         const opacity = (1 - distance / maxDistance) * 0.15;
-                        ctx.strokeStyle = `rgba(0, 255, 136, ${opacity})`;
+                        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacity})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesRef.current[i].x, particlesRef.current[i].y);
@@ -102,8 +118,13 @@ const IntroAnimation = ({ onComplete }) => {
         const animate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            const primaryColor = getPrimaryColor();
+            const r = parseInt(primaryColor.slice(1, 3), 16);
+            const g = parseInt(primaryColor.slice(3, 5), 16);
+            const b = parseInt(primaryColor.slice(5, 7), 16);
+
             // Draw grid
-            ctx.strokeStyle = 'rgba(0, 255, 136, 0.03)';
+            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.03)`;
             ctx.lineWidth = 1;
             const gridSize = 50;
             for (let x = 0; x < canvas.width; x += gridSize) {
